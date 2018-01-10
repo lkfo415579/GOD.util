@@ -1,0 +1,1 @@
+cat setup.sh >> ~/.bashrc
