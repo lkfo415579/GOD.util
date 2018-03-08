@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Author: Rico Sennrich
-# Editor: Revo, 12/15/2017, no sepreate EMAIL&URL., 1.2
+
 """Use operations learned with learn_bpe.py to encode a new text.
 The text will not be smaller, but use only a fixed vocabulary, with rare words
 encoded as variable-length sequences of subword units.
@@ -15,23 +15,19 @@ from __future__ import unicode_literals, division
 
 import sys
 import codecs
+import io
 import argparse
-import json
 import re
-from collections import defaultdict
 
 # hack for python2/3 compatibility
 from io import open
 argparse.open = open
 
-#REVO,10/27/2017, __NUMER__ NOT sepreate
-from regex import Regex, UNICODE
 class BPE(object):
 
-    def __init__(self, codes, separator='@@', vocab=None, glossaries=None):
+    def __init__(self, codes, merges=-1, separator='@@', vocab=None, glossaries=None):
 
         # check version information
-        #codes = codecs.open(codes,"r", encoding='utf-8')
         firstline = codes.readline()
         if firstline.startswith('#version:'):
             self.version = tuple([int(x) for x in re.sub(r'(\.0+)*$','', firstline.split()[-1]).split(".")])
@@ -39,7 +35,7 @@ class BPE(object):
             self.version = (0, 1)
             codes.seek(0)
 
-        self.bpe_codes = [tuple(item.split()) for item in codes]
+        self.bpe_codes = [tuple(item.split()) for (n, item) in enumerate(codes) if (n < merges or merges == -1)]
 
         # some hacking to deal with duplicates (only consider first instance)
         self.bpe_codes = dict([(code,i) for (i,code) in reversed(list(enumerate(self.bpe_codes)))])
@@ -50,46 +46,12 @@ class BPE(object):
 
         self.vocab = vocab
 
-        #self.glossaries = glossaries if glossaries else []
-        self.glossaries = []
-        # for i in xrange(30):
-        #     self.glossaries.append("__URL"+str(i)+"__")
-        #     #self.glossaries.append("__NUM"+str(i)+"__")
-        #     self.glossaries.append("__EMAIL"+str(i)+"__")
-        #
+        self.glossaries = glossaries if glossaries else []
+
         self.cache = {}
-        #added by revo
-        self.__email_addr = Regex(r'([\w\.-]+@[\w\.-]+)')
-        # url address:
-        self.__url_addr = Regex(r'(?P<url>https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))')
 
     def segment(self, sentence):
         """segment single sentence (whitespace-tokenized string) with BPE encoding"""
-        #append EMAIL & URL into glossaries list
-        self.glossaries = []
-        #print sentence
-        #sentence = sentence.replace("  "," ")
-        email = self.__email_addr.findall(sentence)
-        url = self.__url_addr.findall(sentence)
-        real_url = []
-        #print "ORI:",sentence
-        #print "URL:",url
-        #print '---'
-        for matches in url:
-            #real_url.extend([entity for entity in matches if entity != '' and entity != 'www.'])
-            real_url.append(matches[0])
-        #
-        if email is not None:
-            self.glossaries.extend(email)
-        if real_url is not None:
-            for url in real_url:
-                sentence = sentence.replace(url,url+" ")
-            self.glossaries.extend(real_url)
-        self.glossaries = list(set(self.glossaries))
-        #print "SELF:",self.glossaries
-        #print "---"
-        #
-
         output = []
         for word in sentence.split():
             new_word = [out for segment in self._isolate_glossaries(word)
@@ -128,6 +90,11 @@ def create_parser():
         '--codes', '-c', type=argparse.FileType('r'), metavar='PATH',
         required=True,
         help="File with BPE codes (created by learn_bpe.py).")
+    parser.add_argument(
+        '--merges', '-m', type=int, default=-1,
+        metavar='INT',
+        help="Use this many BPE operations (<= number of learned symbols)"+
+             "default: Apply all the learned merge operations")
     parser.add_argument(
         '--output', '-o', type=argparse.FileType('w'), default=sys.stdout,
         metavar='PATH',
@@ -310,16 +277,16 @@ def isolate_glossary(word, glossary):
         return segments + [splits[-1].strip()] if splits[-1] != '' else segments
 
 if __name__ == '__main__':
-    #print "Editor: Revo, 12/15/2017, no sepreate EMAIL&URL."
+
     # python 2/3 compatibility
     if sys.version_info < (3, 0):
         sys.stderr = codecs.getwriter('UTF-8')(sys.stderr)
         sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
         sys.stdin = codecs.getreader('UTF-8')(sys.stdin)
     else:
-        sys.stderr = codecs.getwriter('UTF-8')(sys.stderr.buffer)
-        sys.stdout = codecs.getwriter('UTF-8')(sys.stdout.buffer)
-        sys.stdin = codecs.getreader('UTF-8')(sys.stdin.buffer)
+        sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', write_through=True, line_buffering=True)
 
     parser = create_parser()
     args = parser.parse_args()
@@ -338,7 +305,7 @@ if __name__ == '__main__':
     else:
         vocabulary = None
 
-    bpe = BPE(args.codes, args.separator, vocabulary, args.glossaries)
+    bpe = BPE(args.codes, args.merges, args.separator, vocabulary, args.glossaries)
 
     for line in args.input:
         args.output.write(bpe.segment(line).strip())

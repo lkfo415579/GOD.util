@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['super_tokenizer.py'],
-             pathex=['/data/workshop/super_tokenizer'],
+             pathex=['/home/training/GOD.util/super_tokenizer'],
              binaries=[],
              datas=[],
              hiddenimports=[],

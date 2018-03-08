@@ -1,5 +1,5 @@
 #!/bin/bash
-#version1.1,revo,12/22/2017
+#version1.2 revo,12/22/2017, including filtering and duplicated corpus remove
 if [ "$1" == "-h"  ]; then
   echo 'Please modify your correct path.'
   echo 'Usage : ./pre'
