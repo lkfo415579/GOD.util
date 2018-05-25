@@ -1,0 +1,179 @@
+2017-12-27 14:33:00,023[11823] - NMTSERVER - Started Language detector server.
+2017-12-27 14:33:00,023[11823] - tornado.general - Starting 12 processes
+2017-12-27 14:55:16,496[11832] - tornado.access - 200 POST /translate (10.0.100.190) 2.76ms
+2017-12-27 14:55:56,022[11832] - tornado.access - 200 POST /translate (10.0.100.190) 6.21ms
+2017-12-27 14:56:24,463[11832] - tornado.access - 200 POST /translate (10.0.100.190) 7.20ms
+2017-12-27 14:56:30,474[11832] - tornado.access - 200 POST /translate (10.0.100.190) 6.08ms
+2017-12-27 14:56:31,362[11832] - tornado.access - 200 POST /translate (10.0.100.190) 7.06ms
+2017-12-27 14:56:32,068[11832] - tornado.access - 200 POST /translate (10.0.100.190) 6.07ms
+2017-12-27 14:56:53,970[14984] - NMTSERVER - Started Language detector server.
+2017-12-27 14:56:53,970[14984] - tornado.general - Starting 12 processes
+2017-12-27 14:56:56,895[14997] - tornado.access - 200 POST /translate (10.0.100.190) 7.33ms
+2017-12-27 14:57:06,729[15031] - NMTSERVER - Started Language detector server.
+2017-12-27 14:57:06,730[15031] - tornado.general - Starting 12 processes
+2017-12-27 14:57:10,554[15042] - tornado.access - 200 POST /translate (10.0.100.190) 8.00ms
+2017-12-27 14:57:35,444[15130] - NMTSERVER - Started Language detector server.
+2017-12-27 14:57:35,444[15130] - tornado.general - Starting 12 processes
+2017-12-27 14:57:37,635[15141] - tornado.access - 200 POST /translate (10.0.100.190) 6.86ms
+2017-12-27 14:57:42,303[15141] - tornado.access - 200 POST /translate (10.0.100.190) 5.65ms
+2017-12-27 14:57:46,457[15141] - tornado.access - 200 POST /translate (10.0.100.190) 5.64ms
+2017-12-27 14:57:59,408[15141] - tornado.access - 200 POST /translate (10.0.100.190) 5.46ms
+2017-12-27 14:59:18,693[15141] - tornado.access - 200 POST /translate (10.0.100.190) 5.18ms
+2017-12-27 15:01:15,373[15635] - NMTSERVER - Started Language detector server.
+2017-12-27 15:01:15,373[15635] - tornado.general - Starting 12 processes
+2017-12-27 15:01:17,496[15642] - tornado.access - 200 POST /translate (10.0.100.190) 7.25ms
+2017-12-27 15:01:39,436[15642] - tornado.access - 200 POST /translate (10.0.100.190) 2.84ms
+2017-12-27 15:12:28,005[18004] - NMTSERVER - Started Language detector server.
+2017-12-27 15:12:28,005[18004] - tornado.general - Starting 12 processes
+2017-12-27 15:12:32,315[18020] - tornado.application - Uncaught exception POST /translate (10.0.100.190)
+HTTPRequest(protocol='http', host='10.0.100.182:9999', method='POST', uri='/translate', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Content-Length': '290', 'Apikey': '37447ebe06e5af07b6f8e8e168714e39', 'Accept-Language': 'en-US,en;q=0.9,zh-TW;q=0.8,zh;q=0.7,en-GB;q=0.6', 'Accept-Encoding': 'gzip, deflate', 'Host': '10.0.100.182:9999', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Connection': 'keep-alive', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '61c55259-adff-ca2f-2013-ea1e49331c56'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1349, in _when_complete
+    if result.result() is not None:
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 129, in result
+    raise_exc_info(self.__exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 214, in wrapper
+    result = func(*args, **kwargs)
+  File "tw2cn.py", line 154, in post
+    result = self.tw2cn(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 400, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 359, in __get_result
+    reraise(self._exception, self._traceback)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_compat.py", line 107, in reraise
+    exec('raise exc_type, exc_value, traceback', {}, locals_)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 61, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "tw2cn.py", line 85, in tw2cn
+    output_sent = traditionalize(sentence)
+NameError: global name 'traditionalize' is not defined
+2017-12-27 15:12:32,317[18020] - tornado.access - 500 POST /translate (10.0.100.190) 5.02ms
+2017-12-27 15:20:19,183[18988] - NMTSERVER - Started Language detector server.
+2017-12-27 15:20:19,183[18988] - tornado.general - Starting 12 processes
+2017-12-27 15:20:34,351[19032] - NMTSERVER - Started Language detector server.
+2017-12-27 15:20:34,351[19032] - tornado.general - Starting 12 processes
+2017-12-27 15:22:46,749[19425] - NMTSERVER - Started Language detector server.
+2017-12-27 15:22:46,750[19425] - tornado.general - Starting 12 processes
+2017-12-27 15:22:48,696[19425] - tornado.general - child 11 (pid 19441) killed by signal 11, restarting
+2017-12-27 15:22:50,551[19425] - tornado.general - child 11 (pid 19446) killed by signal 11, restarting
+2017-12-27 15:22:52,534[19425] - tornado.general - child 10 (pid 19440) killed by signal 11, restarting
+2017-12-27 15:22:53,132[19425] - tornado.general - child 11 (pid 19451) killed by signal 11, restarting
+2017-12-27 15:22:54,143[19425] - tornado.general - child 8 (pid 19438) killed by signal 11, restarting
+2017-12-27 15:22:54,774[19425] - tornado.general - child 8 (pid 19464) killed by signal 11, restarting
+2017-12-27 15:22:55,291[19425] - tornado.general - child 11 (pid 19460) killed by signal 11, restarting
+2017-12-27 15:22:55,711[19425] - tornado.general - child 10 (pid 19457) killed by signal 11, restarting
+2017-12-27 15:22:56,140[19425] - tornado.general - child 8 (pid 19468) killed by signal 11, restarting
+2017-12-27 15:22:56,503[19425] - tornado.general - child 10 (pid 19474) killed by signal 11, restarting
+2017-12-27 15:22:56,737[19425] - tornado.general - child 8 (pid 19476) killed by signal 11, restarting
+2017-12-27 15:22:57,035[19425] - tornado.general - child 10 (pid 19479) killed by signal 11, restarting
+2017-12-27 15:23:03,286[19497] - NMTSERVER - Started Language detector server.
+2017-12-27 15:23:03,286[19497] - tornado.general - Starting 12 processes
+2017-12-27 15:23:10,165[19497] - tornado.general - child 8 (pid 19510) killed by signal 11, restarting
+2017-12-27 15:23:10,930[19497] - tornado.general - child 4 (pid 19506) killed by signal 11, restarting
+2017-12-27 15:23:11,078[19497] - tornado.general - child 8 (pid 19528) killed by signal 11, restarting
+2017-12-27 15:23:11,248[19497] - tornado.general - child 8 (pid 19534) killed by signal 11, restarting
+2017-12-27 15:23:11,429[19497] - tornado.general - child 4 (pid 19532) killed by signal 11, restarting
+2017-12-27 15:23:11,577[19497] - tornado.general - child 8 (pid 19536) killed by signal 11, restarting
+2017-12-27 15:23:11,736[19497] - tornado.general - child 4 (pid 19539) killed by signal 11, restarting
+2017-12-27 15:23:11,916[19497] - tornado.general - child 4 (pid 19544) killed by signal 11, restarting
+2017-12-27 15:23:12,091[19497] - tornado.general - child 8 (pid 19541) killed by signal 11, restarting
+2017-12-27 15:23:12,274[19497] - tornado.general - child 4 (pid 19546) killed by signal 11, restarting
+2017-12-27 15:23:12,447[19497] - tornado.general - child 3 (pid 19505) killed by signal 11, restarting
+2017-12-27 15:23:12,639[19497] - tornado.general - child 8 (pid 19548) killed by signal 11, restarting
+2017-12-27 15:23:12,803[19497] - tornado.general - child 3 (pid 19553) killed by signal 11, restarting
+2017-12-27 15:23:12,997[19497] - tornado.general - child 6 (pid 19508) killed by signal 11, restarting
+2017-12-27 15:23:13,201[19497] - tornado.general - child 3 (pid 19558) killed by signal 11, restarting
+2017-12-27 15:23:13,399[19497] - tornado.general - child 9 (pid 19511) killed by signal 11, restarting
+2017-12-27 15:23:13,590[19497] - tornado.general - child 3 (pid 19562) killed by signal 11, restarting
+2017-12-27 15:25:47,572[19497] - tornado.general - child 4 (pid 19550) killed by signal 11, restarting
+2017-12-27 15:25:48,042[19497] - tornado.general - child 6 (pid 19560) killed by signal 11, restarting
+2017-12-27 15:25:48,420[19497] - tornado.general - child 3 (pid 19567) killed by signal 11, restarting
+2017-12-27 15:25:48,629[19497] - tornado.general - child 6 (pid 19913) killed by signal 11, restarting
+2017-12-27 15:25:48,813[19497] - tornado.general - child 3 (pid 19915) killed by signal 11, restarting
+2017-12-27 15:25:49,011[19497] - tornado.general - child 9 (pid 19565) killed by signal 11, restarting
+2017-12-27 15:25:49,225[19497] - tornado.general - child 3 (pid 19920) killed by signal 11, restarting
+2017-12-27 15:25:49,426[19497] - tornado.general - child 9 (pid 19923) killed by signal 11, restarting
+2017-12-27 15:25:49,633[19497] - tornado.general - child 6 (pid 19918) killed by signal 11, restarting
+2017-12-27 15:25:49,839[19497] - tornado.general - child 9 (pid 19927) killed by signal 11, restarting
+2017-12-27 15:25:50,033[19497] - tornado.general - child 6 (pid 19930) killed by signal 11, restarting
+2017-12-27 15:25:50,225[19497] - tornado.general - child 9 (pid 19932) killed by signal 11, restarting
+2017-12-27 15:25:50,434[19497] - tornado.general - child 6 (pid 19935) killed by signal 11, restarting
+2017-12-27 15:25:50,612[19497] - tornado.general - child 9 (pid 19938) killed by signal 11, restarting
+2017-12-27 15:25:50,800[19497] - tornado.general - child 6 (pid 19940) killed by signal 11, restarting
+2017-12-27 15:25:51,036[19497] - tornado.general - child 9 (pid 19943) killed by signal 11, restarting
+2017-12-27 15:25:51,235[19497] - tornado.general - child 9 (pid 19948) killed by signal 11, restarting
+2017-12-27 15:25:51,470[19497] - tornado.general - child 3 (pid 19925) killed by signal 11, restarting
+2017-12-27 15:25:51,683[19497] - tornado.general - child 9 (pid 19950) killed by signal 11, restarting
+2017-12-27 15:25:51,887[19497] - tornado.general - child 3 (pid 19953) killed by signal 11, restarting
+2017-12-27 15:25:52,079[19497] - tornado.general - child 9 (pid 19955) killed by signal 11, restarting
+2017-12-27 15:25:52,270[19497] - tornado.general - child 3 (pid 19958) killed by signal 11, restarting
+2017-12-27 15:25:52,455[19497] - tornado.general - child 9 (pid 19960) killed by signal 11, restarting
+2017-12-27 15:25:52,651[19497] - tornado.general - child 3 (pid 19962) killed by signal 11, restarting
+2017-12-27 15:25:52,839[19497] - tornado.general - child 9 (pid 19965) killed by signal 11, restarting
+2017-12-27 15:25:53,018[19497] - tornado.general - child 3 (pid 19967) killed by signal 11, restarting
+2017-12-27 15:28:04,314[20277] - NMTSERVER - Started Language detector server.
+2017-12-27 15:28:04,315[20277] - tornado.general - Starting 12 processes
+2017-12-27 15:28:08,547[20287] - tornado.application - Uncaught exception POST /translate (10.0.100.190)
+HTTPRequest(protocol='http', host='10.0.100.182:9999', method='POST', uri='/translate', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Content-Length': '290', 'Apikey': '37447ebe06e5af07b6f8e8e168714e39', 'Accept-Language': 'en-US,en;q=0.9,zh-TW;q=0.8,zh;q=0.7,en-GB;q=0.6', 'Accept-Encoding': 'gzip, deflate', 'Host': '10.0.100.182:9999', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Connection': 'keep-alive', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '67f6b4e2-8848-2488-0593-af3541d342be'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1349, in _when_complete
+    if result.result() is not None:
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 129, in result
+    raise_exc_info(self.__exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 214, in wrapper
+    result = func(*args, **kwargs)
+  File "tw2cn.py", line 155, in post
+    result = self.tw2cn(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 407, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 359, in __get_result
+    reraise(self._exception, self._traceback)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_compat.py", line 107, in reraise
+    exec('raise exc_type, exc_value, traceback', {}, locals_)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 61, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "tw2cn.py", line 83, in tw2cn
+    output_sent = zhconv.convert(sentence)
+TypeError: convert() takes at least 2 arguments (1 given)
+2017-12-27 15:28:08,549[20287] - tornado.access - 500 POST /translate (10.0.100.190) 17.76ms
+2017-12-27 15:28:24,842[20328] - NMTSERVER - Started Language detector server.
+2017-12-27 15:28:24,842[20328] - tornado.general - Starting 12 processes
+2017-12-27 15:28:30,992[20337] - tornado.access - 200 POST /translate (10.0.100.190) 36.38ms
+2017-12-27 15:29:05,229[20337] - tornado.access - 200 POST /translate (10.0.100.190) 1.75ms
+2017-12-27 15:33:33,865[20956] - NMTSERVER - Started Language detector server.
+2017-12-27 15:33:33,865[20956] - tornado.general - Starting 12 processes
+2017-12-27 15:33:36,203[20964] - tornado.application - Uncaught exception POST /translate (10.0.100.190)
+HTTPRequest(protocol='http', host='10.0.100.182:9999', method='POST', uri='/translate', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Content-Length': '6029', 'Apikey': '37447ebe06e5af07b6f8e8e168714e39', 'Accept-Language': 'en-US,en;q=0.9,zh-TW;q=0.8,zh;q=0.7,en-GB;q=0.6', 'Accept-Encoding': 'gzip, deflate', 'Host': '10.0.100.182:9999', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Connection': 'keep-alive', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': 'ba8506ee-5ded-c616-a73e-7f265c7ac8d5'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1349, in _when_complete
+    if result.result() is not None:
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 129, in result
+    raise_exc_info(self.__exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 214, in wrapper
+    result = func(*args, **kwargs)
+  File "tw2cn.py", line 156, in post
+    result = self.tw2cn(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 400, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 359, in __get_result
+    reraise(self._exception, self._traceback)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_compat.py", line 107, in reraise
+    exec('raise exc_type, exc_value, traceback', {}, locals_)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 61, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "tw2cn.py", line 81, in tw2cn
+    print zhconv.__version__
+AttributeError: 'module' object has no attribute '__version__'
+2017-12-27 15:33:36,206[20964] - tornado.access - 500 POST /translate (10.0.100.190) 6.81ms
+2017-12-27 15:34:06,572[21034] - NMTSERVER - Started Language detector server.
+2017-12-27 15:34:06,572[21034] - tornado.general - Starting 12 processes
+2017-12-27 15:34:08,440[21048] - tornado.access - 200 POST /translate (10.0.100.190) 52.09ms
+2017-12-27 15:37:12,335[21508] - NMTSERVER - Started Language detector server.
+2017-12-27 15:37:12,335[21508] - tornado.general - Starting 12 processes
+2017-12-27 15:37:14,741[21514] - tornado.access - 200 POST /translate (10.0.100.190) 50.95ms
+2017-12-27 15:37:47,979[21514] - tornado.access - 200 POST /translate (10.0.100.190) 32.36ms
+2017-12-27 15:38:10,763[21666] - NMTSERVER - Started Language detector server.
+2017-12-27 15:38:10,763[21666] - tornado.general - Starting 12 processes
+2017-12-27 15:38:13,087[21680] - tornado.access - 200 POST /translate (10.0.100.190) 49.09ms
+2017-12-27 15:38:46,921[21680] - tornado.access - 200 POST /translate (10.0.100.190) 5.95ms
+2017-12-27 15:39:06,614[21680] - tornado.access - 200 POST /translate (10.0.100.190) 19.32ms

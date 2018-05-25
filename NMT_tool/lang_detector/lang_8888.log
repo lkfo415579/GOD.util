@@ -1,0 +1,663 @@
+2017-12-07 11:32:11,284[11400] - NMTSERVER - Started Language detector server.
+2017-12-07 11:32:11,284[11400] - tornado.general - Starting 12 processes
+2017-12-07 11:32:16,396[11421] - NMTSERVER - Started Language detector server.
+2017-12-07 11:32:16,397[11421] - tornado.general - Starting 12 processes
+2017-12-07 13:48:19,607[11430] - tornado.access - 404 POST / (10.0.100.190) 1.83ms
+2017-12-07 13:48:45,829[11430] - tornado.application - Uncaught exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/http1connection.py", line 238, in _read_message
+    delegate.finish()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/routing.py", line 251, in finish
+    self.delegate.finish()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 2096, in finish
+    self.execute()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 2116, in execute
+    **self.handler_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 192, in __init__
+    self.initialize(**kwargs)
+  File "lang_detector_server.py", line 67, in initialize
+    self.logger      = server_ctx['logger']
+KeyError: 'logger'
+2017-12-07 14:01:16,774[20537] - NMTSERVER - Started Language detector server.
+2017-12-07 14:01:16,775[20537] - tornado.general - Starting 12 processes
+2017-12-07 14:01:20,114[20544] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '472bc606-863b-4f21-b855-774d59ad4e4f'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 144, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 81, in lang_detect
+    self.logger.info( "Detected:%s:%s" % (str(detected),sentence) )
+NameError: global name 'sentence' is not defined
+2017-12-07 14:01:20,116[20544] - tornado.access - 500 POST /lang (10.0.100.190) 6.94ms
+2017-12-07 14:01:50,572[20588] - NMTSERVER - Started Language detector server.
+2017-12-07 14:01:50,572[20588] - tornado.general - Starting 12 processes
+2017-12-07 14:01:54,523[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:01:54,523[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:01:54,524[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:01:54,524[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:01:54,524[20594] - NMTSERVER - ---
+2017-12-07 14:01:54,526[20594] - tornado.access - 200 POST /lang (10.0.100.190) 6.13ms
+2017-12-07 14:02:03,232[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:03,232[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:03,232[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:03,232[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:03,233[20594] - NMTSERVER - ---
+2017-12-07 14:02:03,233[20594] - tornado.access - 200 POST /lang (10.0.100.190) 2.96ms
+2017-12-07 14:02:03,849[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:03,850[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:03,850[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:03,850[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:03,850[20594] - NMTSERVER - ---
+2017-12-07 14:02:03,851[20594] - tornado.access - 200 POST /lang (10.0.100.190) 3.22ms
+2017-12-07 14:02:04,314[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:04,314[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:04,314[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:04,314[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:04,315[20594] - NMTSERVER - ---
+2017-12-07 14:02:04,316[20594] - tornado.access - 200 POST /lang (10.0.100.190) 2.99ms
+2017-12-07 14:02:04,699[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:04,699[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:04,699[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:04,700[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:04,700[20594] - NMTSERVER - ---
+2017-12-07 14:02:04,702[20594] - tornado.access - 200 POST /lang (10.0.100.190) 4.95ms
+2017-12-07 14:02:05,034[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:05,034[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:05,034[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:05,034[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:05,034[20594] - NMTSERVER - ---
+2017-12-07 14:02:05,035[20594] - tornado.access - 200 POST /lang (10.0.100.190) 2.91ms
+2017-12-07 14:02:05,468[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:05,468[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:05,468[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:05,468[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:05,468[20594] - NMTSERVER - ---
+2017-12-07 14:02:05,469[20594] - tornado.access - 200 POST /lang (10.0.100.190) 2.63ms
+2017-12-07 14:02:05,831[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:05,831[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:05,832[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:05,832[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:05,832[20594] - NMTSERVER - ---
+2017-12-07 14:02:05,833[20594] - tornado.access - 200 POST /lang (10.0.100.190) 2.88ms
+2017-12-07 14:02:06,269[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:06,269[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:06,269[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:06,270[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:06,270[20594] - NMTSERVER - ---
+2017-12-07 14:02:06,270[20594] - tornado.access - 200 POST /lang (10.0.100.190) 2.61ms
+2017-12-07 14:02:06,742[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:06,743[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:06,743[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:06,743[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:06,743[20594] - NMTSERVER - ---
+2017-12-07 14:02:06,744[20594] - tornado.access - 200 POST /lang (10.0.100.190) 3.25ms
+2017-12-07 14:02:07,199[20594] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:02:07,199[20594] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:02:07,199[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:07,200[20594] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:02:07,200[20594] - NMTSERVER - ---
+2017-12-07 14:02:07,201[20594] - tornado.access - 200 POST /lang (10.0.100.190) 3.26ms
+2017-12-07 14:05:45,949[20858] - NMTSERVER - Started Language detector server.
+2017-12-07 14:05:45,949[20858] - tornado.general - Starting 12 processes
+2017-12-07 14:05:48,586[20868] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:05:48,586[20868] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:05:48,587[20868] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:05:48,587[20868] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:05:48,587[20868] - NMTSERVER - ---
+2017-12-07 14:05:48,590[20868] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': 'cfecd3ba-17fc-40a9-9ee8-df1ab24539e8'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 133, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 91, in lang_detect
+    tmp['name'] = ele['name']
+TypeError: 'Language' object has no attribute '__getitem__'
+2017-12-07 14:05:48,592[20868] - tornado.access - 500 POST /lang (10.0.100.190) 9.19ms
+2017-12-07 14:06:51,740[20940] - NMTSERVER - Started Language detector server.
+2017-12-07 14:06:51,741[20940] - tornado.general - Starting 12 processes
+2017-12-07 14:06:54,862[20947] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:06:54,862[20947] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:06:54,863[20947] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:06:54,863[20947] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:06:54,863[20947] - NMTSERVER - ---
+2017-12-07 14:06:54,866[20947] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '6814c621-c326-48e5-8e44-b0e8ced0c05e'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 134, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 92, in lang_detect
+    tmp['name'] = ele['name']
+TypeError: 'Language' object has no attribute '__getitem__'
+2017-12-07 14:06:54,868[20947] - tornado.access - 500 POST /lang (10.0.100.190) 9.15ms
+2017-12-07 14:07:27,965[20990] - NMTSERVER - Started Language detector server.
+2017-12-07 14:07:27,966[20990] - tornado.general - Starting 12 processes
+2017-12-07 14:07:30,128[21001] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:07:30,128[21001] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:07:30,128[21001] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:07:30,128[21001] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:07:30,129[21001] - NMTSERVER - ---
+2017-12-07 14:07:30,132[21001] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '3f3b3382-4663-4d2a-ac73-f8ea6274681d'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 134, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 92, in lang_detect
+    tmp['name'] = ele['name']
+TypeError: 'Language' object has no attribute '__getitem__'
+2017-12-07 14:07:30,134[21001] - tornado.access - 500 POST /lang (10.0.100.190) 9.19ms
+2017-12-07 14:08:37,754[21077] - NMTSERVER - Started Language detector server.
+2017-12-07 14:08:37,754[21077] - tornado.general - Starting 12 processes
+2017-12-07 14:08:40,857[21091] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:08:40,857[21091] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:08:40,858[21091] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:08:40,858[21091] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:08:40,858[21091] - NMTSERVER - ---
+2017-12-07 14:08:40,861[21091] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '04876888-0c72-4930-844d-224387859386'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 135, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 93, in lang_detect
+    tmp['name'] = ele['name']
+TypeError: 'Language' object has no attribute '__getitem__'
+2017-12-07 14:08:40,863[21091] - tornado.access - 500 POST /lang (10.0.100.190) 9.10ms
+2017-12-07 14:08:54,074[21110] - NMTSERVER - Started Language detector server.
+2017-12-07 14:08:54,074[21110] - tornado.general - Starting 12 processes
+2017-12-07 14:08:56,387[21124] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:08:56,387[21124] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:08:56,387[21124] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:08:56,388[21124] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:08:56,388[21124] - NMTSERVER - ---
+2017-12-07 14:08:56,391[21124] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '15a16527-149b-4e2d-a55c-d95a2973a692'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 136, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 94, in lang_detect
+    tmp['name'] = ele['name']
+TypeError: 'Language' object has no attribute '__getitem__'
+2017-12-07 14:08:56,393[21124] - tornado.access - 500 POST /lang (10.0.100.190) 8.95ms
+2017-12-07 14:10:01,073[21194] - NMTSERVER - Started Language detector server.
+2017-12-07 14:10:01,073[21194] - tornado.general - Starting 12 processes
+2017-12-07 14:10:03,653[21200] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:10:03,654[21200] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:10:03,654[21200] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:10:03,654[21200] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:10:03,655[21200] - NMTSERVER - ---
+2017-12-07 14:10:03,658[21200] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': 'e607440e-2998-4492-be03-efd388caafb4'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 138, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 96, in lang_detect
+    tmp['score'] = float(detected[tmp_ele[2][:2]])
+KeyError: 'co'
+2017-12-07 14:10:03,660[21200] - tornado.access - 500 POST /lang (10.0.100.190) 9.00ms
+2017-12-07 14:10:41,183[21250] - NMTSERVER - Started Language detector server.
+2017-12-07 14:10:41,184[21250] - tornado.general - Starting 12 processes
+2017-12-07 14:10:42,582[21263] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:10:42,583[21263] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:10:42,583[21263] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:10:42,583[21263] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:10:42,583[21263] - NMTSERVER - ---
+2017-12-07 14:10:42,587[21263] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '1379', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '6ca68c9b-ba1d-4c56-8c92-ca92fd239e2e'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 139, in post
+    result = self.lang_detect(task).result(300)
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/_base.py", line 429, in result
+    return self.__get_result()
+  File "/usr/local/lib/python2.7/dist-packages/concurrent/futures/thread.py", line 62, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "lang_detector_server.py", line 96, in lang_detect
+    tmp['score'] = float(detected[tmp_ele[2][:2]])
+KeyError: 'co'
+2017-12-07 14:10:42,589[21263] - tornado.access - 500 POST /lang (10.0.100.190) 9.01ms
+2017-12-07 14:10:53,098[21278] - NMTSERVER - Started Language detector server.
+2017-12-07 14:10:53,099[21278] - tornado.general - Starting 12 processes
+2017-12-07 14:10:55,404[21291] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:10:55,405[21291] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:10:55,405[21291] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:10:55,405[21291] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:10:55,405[21291] - NMTSERVER - ---
+2017-12-07 14:10:55,408[21291] - tornado.access - 200 POST /lang (10.0.100.190) 6.10ms
+2017-12-07 14:11:54,111[21371] - NMTSERVER - Started Language detector server.
+2017-12-07 14:11:54,112[21371] - tornado.general - Starting 12 processes
+2017-12-07 14:11:57,532[21380] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:11:57,533[21380] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:11:57,533[21380] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:11:57,533[21380] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:11:57,533[21380] - NMTSERVER - ---
+2017-12-07 14:11:57,536[21380] - tornado.access - 200 POST /lang (10.0.100.190) 6.08ms
+2017-12-07 14:12:46,095[21440] - NMTSERVER - Started Language detector server.
+2017-12-07 14:12:46,095[21440] - tornado.general - Starting 12 processes
+2017-12-07 14:12:48,467[21445] - NMTSERVER - Detected:['zh']:主人公艾伦亲眼看着人们以及自己的母亲被巨人吞食，怀着对巨人无法形容的憎恨和痛恨，誓言杀死所有巨人。城墙崩坏的两年后，艾伦加入104期训练兵团学习和巨人战斗的技术。在训练兵团的三年，艾伦在同期训练兵里有着其他人无法比拟的强悍精神力。即使亲眼见过地狱也依然勇敢地向巨人挑战的艾伦，如愿以偿加入了向往已久的调查 兵团。
+2017-12-07 14:12:48,467[21445] - NMTSERVER - name: Chinese     code: zh       confidence:  99.0 read bytes:  2008
+2017-12-07 14:12:48,468[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:12:48,468[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:12:48,468[21445] - NMTSERVER - ---
+2017-12-07 14:12:48,470[21445] - tornado.access - 200 POST /lang (10.0.100.190) 6.11ms
+2017-12-07 14:13:02,597[21445] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+
+Your applications can read and write data into etcd. A simple use-case is to store database connection details or feature flags in etcd as key value pairs. These values can be watched, allowing your app to reconfigure itself when they change.
+
+Advanced uses take advantage of the consistency guarantees to implement database leader elections or do distributed locking across a cluster of workers.
+2017-12-07 14:13:02,598[21445] - NMTSERVER - name: English     code: en       confidence:  99.0 read bytes:  1171
+2017-12-07 14:13:02,598[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:02,598[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:02,598[21445] - NMTSERVER - ---
+2017-12-07 14:13:02,600[21445] - tornado.access - 200 POST /lang (10.0.100.190) 4.57ms
+2017-12-07 14:13:13,075[21445] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.你好呀
+
+Your applications can read and write data into etcd. A simple use-case is to store database connection details or feature flags in etcd as key value pairs. These values can be watched, allowing your app to reconfigure itself when they change.
+
+Advanced uses take advantage of the consistency guarantees to implement database leader elections or do distributed locking across a cluster of workers.
+2017-12-07 14:13:13,075[21445] - NMTSERVER - name: English     code: en       confidence:  98.0 read bytes:  1173
+2017-12-07 14:13:13,076[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:13,076[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:13,076[21445] - NMTSERVER - ---
+2017-12-07 14:13:13,078[21445] - tornado.access - 200 POST /lang (10.0.100.190) 4.81ms
+2017-12-07 14:13:15,249[21445] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+你好呀
+
+Your applications can read and write data into etcd. A simple use-case is to store database connection details or feature flags in etcd as key value pairs. These values can be watched, allowing your app to reconfigure itself when they change.
+
+Advanced uses take advantage of the consistency guarantees to implement database leader elections or do distributed locking across a cluster of workers.
+2017-12-07 14:13:15,250[21445] - NMTSERVER - name: English     code: en       confidence:  98.0 read bytes:  1173
+2017-12-07 14:13:15,250[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:15,250[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:15,250[21445] - NMTSERVER - ---
+2017-12-07 14:13:15,251[21445] - tornado.access - 200 POST /lang (10.0.100.190) 2.97ms
+2017-12-07 14:13:39,079[21445] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. 你好呀，你想干什麼? It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+2017-12-07 14:13:39,079[21445] - NMTSERVER - name: English     code: en       confidence:  90.0 read bytes:  1089
+2017-12-07 14:13:39,079[21445] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:   9.0 read bytes:  1890
+2017-12-07 14:13:39,079[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:13:39,080[21445] - NMTSERVER - ---
+2017-12-07 14:13:39,080[21445] - tornado.access - 200 POST /lang (10.0.100.190) 3.17ms
+2017-12-07 14:16:53,124[21445] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. 你好呀，你想干什麼? It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+2017-12-07 14:16:53,124[21445] - NMTSERVER - name: English     code: en       confidence:  90.0 read bytes:  1089
+2017-12-07 14:16:53,124[21445] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:   9.0 read bytes:  1890
+2017-12-07 14:16:53,125[21445] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:16:53,125[21445] - NMTSERVER - ---
+2017-12-07 14:16:53,125[21445] - tornado.access - 200 POST /lang (10.0.100.190) 3.02ms
+2017-12-07 14:16:55,704[21718] - NMTSERVER - Started Language detector server.
+2017-12-07 14:16:55,704[21718] - tornado.general - Starting 12 processes
+2017-12-07 14:16:56,989[21732] - tornado.general - 400 POST /lang (10.0.100.190): Missing argument top
+2017-12-07 14:16:56,990[21732] - tornado.access - 400 POST /lang (10.0.100.190) 4.01ms
+2017-12-07 14:16:58,359[21732] - tornado.general - 400 POST /lang (10.0.100.190): Missing argument top
+2017-12-07 14:16:58,360[21732] - tornado.access - 400 POST /lang (10.0.100.190) 1.46ms
+2017-12-07 14:17:14,184[21771] - NMTSERVER - Started Language detector server.
+2017-12-07 14:17:14,184[21771] - tornado.general - Starting 12 processes
+2017-12-07 14:17:16,473[21783] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '474', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '7b03791e-a83f-485a-b233-305fa4b4a331'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 122, in post
+    task = build_task(task)
+  File "lang_detector_server.py", line 53, in build_task
+    if top.strip() == "":
+AttributeError: 'NoneType' object has no attribute 'strip'
+2017-12-07 14:17:16,475[21783] - tornado.access - 500 POST /lang (10.0.100.190) 4.43ms
+2017-12-07 14:17:17,547[21783] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '474', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': 'c9329274-ee6f-4679-8890-20adfee5f595'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 122, in post
+    task = build_task(task)
+  File "lang_detector_server.py", line 53, in build_task
+    if top.strip() == "":
+AttributeError: 'NoneType' object has no attribute 'strip'
+2017-12-07 14:17:17,548[21783] - tornado.access - 500 POST /lang (10.0.100.190) 1.59ms
+2017-12-07 14:17:17,915[21783] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '474', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '8b606a38-f497-42ee-98fb-99fec43f437c'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 122, in post
+    task = build_task(task)
+  File "lang_detector_server.py", line 53, in build_task
+    if top.strip() == "":
+AttributeError: 'NoneType' object has no attribute 'strip'
+2017-12-07 14:17:17,916[21783] - tornado.access - 500 POST /lang (10.0.100.190) 1.55ms
+2017-12-07 14:17:18,298[21783] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '474', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '9bfc0765-7018-4885-bd3c-d4495ca309a2'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 122, in post
+    task = build_task(task)
+  File "lang_detector_server.py", line 53, in build_task
+    if top.strip() == "":
+AttributeError: 'NoneType' object has no attribute 'strip'
+2017-12-07 14:17:18,299[21783] - tornado.access - 500 POST /lang (10.0.100.190) 1.34ms
+2017-12-07 14:17:19,007[21783] - tornado.application - Uncaught exception POST /lang (10.0.100.190)
+HTTPServerRequest(protocol='http', host='10.0.100.182:8888', method='POST', uri='/lang', version='HTTP/1.1', remote_ip='10.0.100.190', headers={'Content-Length': '474', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept': '*/*', 'User-Agent': 'PostmanRuntime/6.4.1', 'Host': '10.0.100.182:8888', 'Cache-Control': 'no-cache', 'Content-Type': 'application/x-www-form-urlencoded', 'Postman-Token': '8c88118c-4624-471a-9a2b-e81af7c42a2e'})
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tornado/web.py", line 1511, in _execute
+    result = yield result
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 1055, in run
+    value = future.result()
+  File "/usr/local/lib/python2.7/dist-packages/tornado/concurrent.py", line 238, in result
+    raise_exc_info(self._exc_info)
+  File "/usr/local/lib/python2.7/dist-packages/tornado/gen.py", line 292, in wrapper
+    result = func(*args, **kwargs)
+  File "lang_detector_server.py", line 122, in post
+    task = build_task(task)
+  File "lang_detector_server.py", line 53, in build_task
+    if top.strip() == "":
+AttributeError: 'NoneType' object has no attribute 'strip'
+2017-12-07 14:17:19,007[21783] - tornado.access - 500 POST /lang (10.0.100.190) 1.71ms
+2017-12-07 14:18:01,697[21837] - NMTSERVER - Started Language detector server.
+2017-12-07 14:18:01,697[21837] - tornado.general - Starting 12 processes
+2017-12-07 14:18:03,968[21866] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. 你好呀，你想干什麼? It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+2017-12-07 14:18:03,968[21866] - NMTSERVER - name: English     code: en       confidence:  90.0 read bytes:  1089
+2017-12-07 14:18:03,969[21866] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:   9.0 read bytes:  1890
+2017-12-07 14:18:03,969[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:03,969[21866] - NMTSERVER - ---
+2017-12-07 14:18:03,971[21866] - tornado.access - 200 POST /lang (10.0.100.190) 6.08ms
+2017-12-07 14:18:05,470[21866] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. 你好呀，你想干什麼? It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+2017-12-07 14:18:05,470[21866] - NMTSERVER - name: English     code: en       confidence:  90.0 read bytes:  1089
+2017-12-07 14:18:05,470[21866] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:   9.0 read bytes:  1890
+2017-12-07 14:18:05,471[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:05,471[21866] - NMTSERVER - ---
+2017-12-07 14:18:05,471[21866] - tornado.access - 200 POST /lang (10.0.100.190) 2.83ms
+2017-12-07 14:18:08,523[21866] - NMTSERVER - Detected:['en']:Overview
+etcd is a distributed key value store that provides a reliable way to store data across a cluster of machines. 你好呀，你想干什麼? It’s open-source and available on GitHub. etcd gracefully handles leader elections during network partitions and will tolerate machine failure, including the leader.
+2017-12-07 14:18:08,523[21866] - NMTSERVER - name: English     code: en       confidence:  90.0 read bytes:  1089
+2017-12-07 14:18:08,523[21866] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:   9.0 read bytes:  1890
+2017-12-07 14:18:08,523[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:08,524[21866] - NMTSERVER - ---
+2017-12-07 14:18:08,524[21866] - tornado.access - 200 POST /lang (10.0.100.190) 2.89ms
+2017-12-07 14:18:15,143[21866] - NMTSERVER - Detected:['zh']:你想干嗎?
+2017-12-07 14:18:15,144[21866] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  92.0 read bytes:  1890
+2017-12-07 14:18:15,144[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:15,144[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:15,144[21866] - NMTSERVER - ---
+2017-12-07 14:18:15,146[21866] - tornado.access - 200 POST /lang (10.0.100.190) 3.33ms
+2017-12-07 14:18:26,607[21866] - NMTSERVER - Detected:['en']:what is the haha point?
+2017-12-07 14:18:26,608[21866] - NMTSERVER - name: English     code: en       confidence:  95.0 read bytes:  1869
+2017-12-07 14:18:26,608[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:26,608[21866] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:18:26,608[21866] - NMTSERVER - ---
+2017-12-07 14:18:26,609[21866] - tornado.access - 200 POST /lang (10.0.100.190) 2.88ms
+2017-12-07 14:21:42,177[22660] - NMTSERVER - Started Language detector server.
+2017-12-07 14:21:42,178[22660] - tornado.general - Starting 12 processes
+2017-12-07 14:21:45,645[22674] - NMTSERVER - Detected:['en']:what is the haha point?
+2017-12-07 14:21:45,645[22674] - NMTSERVER - name: English     code: en       confidence:  95.0 read bytes:  1869
+2017-12-07 14:21:45,645[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:45,645[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:45,646[22674] - NMTSERVER - ---
+2017-12-07 14:21:45,648[22674] - tornado.access - 200 POST /lang (10.0.100.190) 5.86ms
+2017-12-07 14:21:47,307[22674] - NMTSERVER - Detected:['en']:what is the haha point?
+2017-12-07 14:21:47,308[22674] - NMTSERVER - name: English     code: en       confidence:  95.0 read bytes:  1869
+2017-12-07 14:21:47,308[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:47,308[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:47,308[22674] - NMTSERVER - ---
+2017-12-07 14:21:47,309[22674] - tornado.access - 200 POST /lang (10.0.100.190) 2.84ms
+2017-12-07 14:21:47,531[22674] - NMTSERVER - Detected:['en']:what is the haha point?
+2017-12-07 14:21:47,531[22674] - NMTSERVER - name: English     code: en       confidence:  95.0 read bytes:  1869
+2017-12-07 14:21:47,531[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:47,531[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:47,531[22674] - NMTSERVER - ---
+2017-12-07 14:21:47,532[22674] - tornado.access - 200 POST /lang (10.0.100.190) 2.47ms
+2017-12-07 14:21:47,982[22674] - NMTSERVER - Detected:['en']:what is the haha point?
+2017-12-07 14:21:47,982[22674] - NMTSERVER - name: English     code: en       confidence:  95.0 read bytes:  1869
+2017-12-07 14:21:47,982[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:47,983[22674] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-07 14:21:47,983[22674] - NMTSERVER - ---
+2017-12-07 14:21:47,984[22674] - tornado.access - 200 POST /lang (10.0.100.190) 3.59ms
+2017-12-18 13:49:14,573[9933] - NMTSERVER - Started Language detector server.
+2017-12-18 13:49:14,573[9933] - tornado.general - Starting 12 processes
+2017-12-18 13:50:11,539[9944] - NMTSERVER - Detected:['en']:Look above the traffic light at a busy intersection in your city and you will probably see a camera. These devices may have been installed to monitor traffic conditions and provide visuals in the case of a collision. But can they do more? Can they help planners optimize traffic flow or identify sites that are most likely to have accidents? And can they do so without requiring individuals to slog through hours of footage?Researchers from the Texas Advanced Computing Center (TACC), the University of Texas Center for Transportation Research and the City of Austin believe so. Together, they are working to develop tools that allow sophisticated, searchable traffic analyses using deep learning and data mining.At the IEEE International Conference on Big Data this month, they will present a new deep learning tool that uses raw traffic camera footage from City of Austin cameras to recognize objects - people, cars, buses, trucks, bicycles, motorcycles and traffic lights - and characterize how those objects move and interact. This information can then be analyzed and queried by traffic engineers and officials to determine, for instance, how many cars drive the wrong way down a one-way street."We are hoping to develop a flexible and efficient system to aid traffic researchers and decision-makers for dynamic, real-life analysis needs," said Weijia Xu, a research scientist who leads the Data Mining & Statistics Group at TACC. "We don't want to build a turn-key solution for a single, specific problem. We want to explore means that may be helpful for a number of analytical needs, even those that may pop up in the future."The algorithm they developed for traffic analysis automatically labels all potential objects from the raw data, tracks objects by comparing them with other previously recognized objects and compares the outputs from each frame to uncover relationships among the objects.  Once researchers had developed a system capable of labeling, tracking and analyzing traffic, they applied it to two practical examples: counting how many moving vehicles traveled down a road and identifying close encounters between vehicles and pedestrians.The system automatically counted vehicles in a 10-minute video clip, and preliminary results showed that their tool was 95 percent accurate overall.Understanding traffic volumes and their distribution over time is critical to validating transportation models and evaluating the performance of the transportation network, said Natalia Ruiz Juri, a research associate and director of the Network Modeling Center at UT's Center for Transportation Research."Current practice often relies on the use of expensive sensors for continuous data collection or on traffic studies that sample traffic volumes for a few days during selected time periods," she said. "The use of artificial intelligence to automatically generate traffic volumes from existing cameras would provide a much broader spatial and temporal coverage of the transportation network, facilitating the generation of valuable datasets to support innovative research and to understand the impact of traffic management and operation decisions."In the case of potential close encounters, researchers were able to automatically identify a number of cases where vehicles and pedestrians were in close proximity. None of these represented real-life dangers, but they demonstrated how the system discovers dangerous locations without human intervention."The City of Austin is committed to ending traffic fatalities, and video analytics will be a powerful tool to help us pinpoint potentially dangerous locations," said Jen Duthie, a consulting engineer for the City of Austin and a collaborator on the project. "We can direct our resources toward fixing problem locations before an injury or fatality occurs."The researchers plan to explore how automation can facilitate other safety-related analyses, such as identifying locations where pedestrians cross busy streets outside of designated walkways, understanding how drivers react to different types of pedestrian-yield signage and quantifying how far pedestrians are willing to walk in order to use a walkway.The project shows how artificial intelligence technologies can greatly reduce the effort involved in analyzing video data and provide actionable information for decision-makers."The highly anticipated introduction of self-driving and connected cars may lead to significant changes in the behavior of vehicles and pedestrians and on the performance of roadways," Ruiz Juri said. "Video data will play a key role in understanding such changes, and artificial intelligence may be central to enabling comprehensive large-scale studies that truly capture the impact of the new technologies."###The team built a website where the public can view examples of their detection, tracking and query tool for traffic analysis. To learn more visit: http://soda.tacc.utexas.edu/
+2017-12-18 13:50:11,539[9944] - NMTSERVER - name: English     code: en       confidence:  99.0 read bytes:  1185
+2017-12-18 13:50:11,540[9944] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:50:11,540[9944] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:50:11,540[9944] - NMTSERVER - ---
+2017-12-18 13:50:11,541[9944] - tornado.access - 200 POST /lang (10.0.100.190) 6.11ms
+2017-12-18 13:50:52,069[9944] - tornado.access - 400 POST /lang (10.0.100.190) 1.17ms
+2017-12-18 13:51:13,401[9944] - tornado.access - 400 POST /lang (10.0.100.190) 0.89ms
+2017-12-18 13:51:23,301[9944] - tornado.access - 400 POST /lang (10.0.100.190) 0.89ms
+2017-12-18 13:51:27,149[9944] - tornado.access - 400 POST /lang (10.0.100.190) 0.92ms
+2017-12-18 13:51:27,333[9944] - tornado.access - 400 POST /lang (10.0.100.190) 0.73ms
+2017-12-18 13:51:27,500[9944] - tornado.access - 400 POST /lang (10.0.100.190) 0.73ms
+2017-12-18 13:51:27,678[9944] - tornado.access - 400 POST /lang (10.0.100.190) 0.75ms
+2017-12-18 13:51:53,506[10159] - NMTSERVER - Started Language detector server.
+2017-12-18 13:51:53,506[10159] - tornado.general - Starting 12 processes
+2017-12-18 13:52:08,490[10173] - tornado.access - 400 POST /lang (10.0.100.190) 1.73ms
+2017-12-18 13:52:22,082[10173] - NMTSERVER - Detected:['en']:Look above the traffic light at a busy intersection in your city and you will probably see a camera.
+2017-12-18 13:52:22,082[10173] - NMTSERVER - name: English     code: en       confidence:  99.0 read bytes:  1495
+2017-12-18 13:52:22,083[10173] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:52:22,083[10173] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:52:22,083[10173] - NMTSERVER - ---
+2017-12-18 13:52:22,085[10173] - tornado.access - 200 POST /lang (10.0.100.190) 4.91ms
+2017-12-18 13:52:31,170[10173] - tornado.access - 400 POST /lang (10.0.100.190) 0.91ms
+2017-12-18 13:53:13,111[10290] - NMTSERVER - Started Language detector server.
+2017-12-18 13:53:13,111[10290] - tornado.general - Starting 12 processes
+2017-12-18 13:53:14,979[10300] - NMTSERVER - Detected:['zh']:你是什麼?
+2017-12-18 13:53:14,979[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  92.0 read bytes:  2048
+2017-12-18 13:53:14,979[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:14,980[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:14,980[10300] - NMTSERVER - ---
+2017-12-18 13:53:14,982[10300] - tornado.access - 200 POST /lang (10.0.100.190) 5.79ms
+2017-12-18 13:53:19,307[10300] - NMTSERVER - Detected:['zh']:你是什麼?
+2017-12-18 13:53:19,307[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  92.0 read bytes:  2048
+2017-12-18 13:53:19,307[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:19,307[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:19,308[10300] - NMTSERVER - ---
+2017-12-18 13:53:19,308[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.71ms
+2017-12-18 13:53:19,703[10300] - NMTSERVER - Detected:['zh']:你是什麼?
+2017-12-18 13:53:19,704[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  92.0 read bytes:  2048
+2017-12-18 13:53:19,704[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:19,704[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:19,704[10300] - NMTSERVER - ---
+2017-12-18 13:53:19,705[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.47ms
+2017-12-18 13:53:19,941[10300] - NMTSERVER - Detected:['zh']:你是什麼?
+2017-12-18 13:53:19,941[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  92.0 read bytes:  2048
+2017-12-18 13:53:19,941[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:19,941[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:19,941[10300] - NMTSERVER - ---
+2017-12-18 13:53:19,942[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.41ms
+2017-12-18 13:53:20,155[10300] - NMTSERVER - Detected:['zh']:你是什麼?
+2017-12-18 13:53:20,156[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  92.0 read bytes:  2048
+2017-12-18 13:53:20,156[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:20,156[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:20,157[10300] - NMTSERVER - ---
+2017-12-18 13:53:20,158[10300] - tornado.access - 200 POST /lang (10.0.100.190) 3.33ms
+2017-12-18 13:53:31,324[10300] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2017-12-18 13:53:31,325[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2017-12-18 13:53:31,325[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,325[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,325[10300] - NMTSERVER - ---
+2017-12-18 13:53:31,326[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.68ms
+2017-12-18 13:53:31,487[10300] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2017-12-18 13:53:31,487[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2017-12-18 13:53:31,487[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,488[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,488[10300] - NMTSERVER - ---
+2017-12-18 13:53:31,489[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.68ms
+2017-12-18 13:53:31,653[10300] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2017-12-18 13:53:31,653[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2017-12-18 13:53:31,654[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,654[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,654[10300] - NMTSERVER - ---
+2017-12-18 13:53:31,655[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.45ms
+2017-12-18 13:53:31,819[10300] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2017-12-18 13:53:31,819[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2017-12-18 13:53:31,820[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,820[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:53:31,820[10300] - NMTSERVER - ---
+2017-12-18 13:53:31,821[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.61ms
+2017-12-18 13:55:23,794[10300] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2017-12-18 13:55:23,794[10300] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2017-12-18 13:55:23,794[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:55:23,795[10300] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2017-12-18 13:55:23,795[10300] - NMTSERVER - ---
+2017-12-18 13:55:23,796[10300] - tornado.access - 200 POST /lang (10.0.100.190) 2.82ms
+2018-02-04 16:36:18,085[26692] - NMTSERVER - Started Language detector server.
+2018-02-04 16:36:18,086[26692] - tornado.general - Starting 12 processes
+2018-02-04 16:36:29,859[26702] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2018-02-04 16:36:29,860[26702] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2018-02-04 16:36:29,860[26702] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-04 16:36:29,860[26702] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-04 16:36:29,860[26702] - NMTSERVER - ---
+2018-02-04 16:36:29,863[26702] - tornado.access - 200 POST /lang (10.0.100.190) 6.38ms
+2018-02-04 16:36:58,766[26702] - tornado.general - 400 POST /lang (10.0.100.190): Missing argument text
+2018-02-04 16:36:58,767[26702] - tornado.access - 400 POST /lang (10.0.100.190) 1.19ms
+2018-02-04 16:37:06,882[26702] - NMTSERVER - Detected:['zh']:<unk>《舰队 Collection》</unk>是将第二次世界大战前后的海军，<unk>《舰队2 Collection》</unk>是最好的。
+目标是成为无敌联合舰队后宫的一款模拟收集游戏。
+游戏有可以养成自己喜欢舰娘的育成要素，或是收集近200个舰娘的收集要素，与其他玩家一起演习，还有将主炮鱼雷等武装改造等等的多彩玩法。
+2018-02-04 16:37:06,882[26702] - NMTSERVER - name: Chinese     code: zh       confidence:  92.0 read bytes:  1977
+2018-02-04 16:37:06,882[26702] - NMTSERVER - name: English     code: en       confidence:   6.0 read bytes:  2048
+2018-02-04 16:37:06,882[26702] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-04 16:37:06,883[26702] - NMTSERVER - ---
+2018-02-04 16:37:06,883[26702] - tornado.access - 200 POST /lang (10.0.100.190) 2.97ms
+2018-02-04 16:37:18,810[26702] - tornado.general - 400 POST /lang (10.0.100.190): Missing argument text
+2018-02-04 16:37:18,811[26702] - tornado.access - 400 POST /lang (10.0.100.190) 0.93ms
+2018-02-04 16:37:22,645[26702] - tornado.general - 400 POST /lang (10.0.100.190): Missing argument text
+2018-02-04 16:37:22,646[26702] - tornado.access - 400 POST /lang (10.0.100.190) 4.77ms
+2018-02-04 16:37:39,721[26702] - NMTSERVER - Detected:['zh']:你到底想要干什麼?
+2018-02-04 16:37:39,722[26702] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  96.0 read bytes:  1925
+2018-02-04 16:37:39,722[26702] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-04 16:37:39,722[26702] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-04 16:37:39,722[26702] - NMTSERVER - ---
+2018-02-04 16:37:39,723[26702] - tornado.access - 200 POST /lang (10.0.100.190) 2.71ms
+2018-02-04 16:37:48,162[26702] - NMTSERVER - Detected:['zh']:<unk>《舰队 Collection》</unk>是将第二次世界大战前后的海军，<unk>《舰队2 Collection》</unk>是最好的。
+目标是成为无敌联合舰队后宫的一款模拟收集游戏。
+游戏有可以养成自己喜欢舰娘的育成要素，或是收集近200个舰娘的收集要素，与其他玩家一起演习，还有将主炮鱼雷等武装改造等等的多彩玩法。
+2018-02-04 16:37:48,162[26702] - NMTSERVER - name: Chinese     code: zh       confidence:  92.0 read bytes:  1977
+2018-02-04 16:37:48,162[26702] - NMTSERVER - name: English     code: en       confidence:   6.0 read bytes:  2048
+2018-02-04 16:37:48,162[26702] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-04 16:37:48,163[26702] - NMTSERVER - ---
+2018-02-04 16:37:48,163[26702] - tornado.access - 200 POST /lang (10.0.100.190) 3.10ms
+2018-02-04 16:37:56,737[26702] - NMTSERVER - Detected:['zh']:<unk>《舰队 Collection》</unk>是将第二次世界大战前后的海军，<unk>《舰队2 Collection》</unk>是最好的。
+2018-02-04 16:37:56,737[26702] - NMTSERVER - name: Chinese     code: zh       confidence:  58.0 read bytes:  1940
+2018-02-04 16:37:56,737[26702] - NMTSERVER - name: English     code: en       confidence:  23.0 read bytes:  2048
+2018-02-04 16:37:56,738[26702] - NMTSERVER - name: Chinese     code: zh_Hant  confidence:  13.0 read bytes:  1890
+2018-02-04 16:37:56,738[26702] - NMTSERVER - ---
+2018-02-04 16:37:56,739[26702] - tornado.access - 200 POST /lang (10.0.100.190) 3.18ms
+2018-02-09 15:57:34,760[30316] - NMTSERVER - Started Language detector server.

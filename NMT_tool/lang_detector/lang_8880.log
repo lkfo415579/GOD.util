@@ -1,0 +1,10 @@
+2018-02-09 16:00:04,609[32370] - NMTSERVER - Started Language detector server.
+2018-02-09 16:00:04,610[32370] - tornado.general - Starting 12 processes
+2018-02-09 16:00:25,562[32379] - tornado.access - 405 GET /lang (10.0.100.190) 1.24ms
+2018-02-09 16:00:25,793[32379] - tornado.access - 404 GET /favicon.ico (10.0.100.190) 0.47ms
+2018-02-09 16:01:53,502[32379] - NMTSERVER - Detected:['en']:One Chinese snowfield motorbike player quickens his pace in the competition.  [Photo by Zhang Xingjian/chinadaily.com.cn]
+2018-02-09 16:01:53,502[32379] - NMTSERVER - name: English     code: en       confidence:  99.0 read bytes:   763
+2018-02-09 16:01:53,506[32379] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-09 16:01:53,506[32379] - NMTSERVER - name: un          code: un       confidence:   0.0 read bytes:     0
+2018-02-09 16:01:53,506[32379] - NMTSERVER - ---
+2018-02-09 16:01:53,508[32379] - tornado.access - 200 POST /lang (10.0.100.190) 8.35ms
