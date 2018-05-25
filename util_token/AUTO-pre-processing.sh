@@ -2,12 +2,12 @@
 #version2.0 revo,1/22/2018, AUTO-preprocessing en-zh,zh-en, and others
 if [ "$1" == "-h"  ]; then
   echo 'Please modify your correct parameters.'
-  echo 'Usage : ./AUTO-pre-processing.sh'
+  echo 'Usage : ./AUTO-pre-processing.sh CORPUS'
     exit 0
 fi
 
 CORPUS=$1
-UTIL_FOLDER=.
+UTIL_FOLDER=~/GOD.util/util_token
 # GOD_FOLDER=~/GOD.util
 SUPER="python /home/training/GOD.util/super_tokenizer/super_tokenizer.py"
 # SUPER=~/GOD.util/super_tokenizer/dist/super_tokenizer/super_tokenizer

@@ -50,46 +50,17 @@ class BPE(object):
 
         self.vocab = vocab
 
-        #self.glossaries = glossaries if glossaries else []
-        self.glossaries = []
-        for i in xrange(10):
-            self.glossaries.append("__URL"+str(i)+"__")
-            self.glossaries.append("__EMAIL"+str(i)+"__")
+        self.glossaries = glossaries if glossaries else []
+
         self.cache = {}
-        #added by revo
-        self.__email_addr = Regex(r'([\w\.-]+@[\w\.-]+)')
-        # url address:
-        self.__url_addr = Regex(r'(?P<url>https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))')
 
     def segment(self, sentence):
         """segment single sentence (whitespace-tokenized string) with BPE encoding"""
-        #append EMAIL & URL into glossaries list
-        self.glossaries = []
-        #print sentence
-        #sentence = sentence.replace("  "," ")
-        email = self.__email_addr.findall(sentence)
-        url = self.__url_addr.findall(sentence)
-        real_url = []
-        #print "ORI:",sentence
-        #print "URL:",url
-        #print '---'
-        for matches in url:
-            #real_url.extend([entity for entity in matches if entity != '' and entity != 'www.'])
-            real_url.append(matches[0])
-        #
-        if email is not None:
-            self.glossaries.extend(email)
-        if real_url is not None:
-            for url in real_url:
-                sentence = sentence.replace(url,url+" ")
-            self.glossaries.extend(real_url)
-        self.glossaries = list(set(self.glossaries))
-        #print "SELF:",self.glossaries
-        #print "---"
-        #
 
         output = []
         for word in sentence.split():
+            if not word:
+                continue
             new_word = [out for segment in self._isolate_glossaries(word)
                         for out in encode(segment,
                                           self.bpe_codes,

@@ -9,7 +9,7 @@ import sys
 def remove_line(filename):
     source_file = codecs.open(filename,'r','utf8')
     lines = source_file.read().split('\n')
-    outfile = codecs.open(filename + 'without_external_line','w','utf8')
+    outfile = codecs.open(filename + '.without_external_line','w','utf8')
     for line in lines:
         wrtstr = ''
         for l in line.splitlines():
