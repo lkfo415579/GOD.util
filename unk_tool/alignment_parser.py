@@ -13,6 +13,7 @@ Command-line usage:
     -s = source file
     -p = target and alignment file
     -o = output file prefix
+    -t = target Language 'en' or 'zh'
     -m = master file for analysis (first:first file, second:second file).
     -c = capitalize sentences in first file.
 """
@@ -25,11 +26,11 @@ from pyltp import Postagger
 from pyltp import NamedEntityRecognizer
 from polyglot.text import Text
 
-# from polyglot.downloader import downloader
-
-# downloader.download("pos2.en")
-# downloader.download("ner2.en")
-
+#from polyglot.downloader import downloader
+#
+#downloader.download("pos2.en")
+#downloader.download("ner2.en")
+#downloader.download("embeddings2.en")
 
 __author__ = "McVilla"
 __date__ = "2018/5/7"
@@ -103,11 +104,10 @@ def adjusting_indexs(sline, pline, idx_list):
 
     return sresult, presult, alignment_idx
 
-def alignment_parse(slines,plines, output, master, target, capitalize):
+def alignment_parse(slines,plines, output, master, target, capitalize, postagger, recognizer):
     outlines = []
-    postagger = Postagger()
-    recognizer = NamedEntityRecognizer()
-    for sline,pline in zip(slines, plines):
+
+    for sline, pline in zip(slines, plines):
         #process tgtfile
         parray = pline.split('|||')
         idx_list = parray[1].strip().split()
@@ -123,6 +123,7 @@ def alignment_parse(slines,plines, output, master, target, capitalize):
             zh_postags = ['nh', 'ni', 'nl', 'ns', 'nz', 'n']
             zh_nertags = []
             unk_count = 0
+            unk_max = 1 + len(pindxs) / 8
             if target == 'zh':
 
                 postags = ltp_tagger(words.split(), postagger)
@@ -132,12 +133,13 @@ def alignment_parse(slines,plines, output, master, target, capitalize):
                 for indx in pindxs:
                     sindex = int(indx.split('-')[0])
                     tindex = int(indx.split('-')[1])
+
                     if nertags[tindex] != 'O':
                         stxts[sindex] = u"<unk2>"
                         ptxts[tindex] = u"<unk2>"
                         unk_count += 1
                         continue
-                    if postags[tindex] in zh_postags and entity_num < 4:
+                    if postags[tindex] in zh_postags and unk_count < (unk_max - entity_num):
                         stxts[sindex] = u"<unk2>"
                         ptxts[tindex] = u"<unk2>"
                         unk_count += 1
@@ -146,12 +148,23 @@ def alignment_parse(slines,plines, output, master, target, capitalize):
                 txt = " ".join(ptxts)
                 text = Text(txt, hint_language_code='en')
                 postags = text.pos_tags
-                # entities = text.entities
-
+                ent = text.entities
+                entity_num = len(ent)
+                co =[]
+                if ent:
+                    for ind in ent:
+                        for j in ind:
+                            co.append(ptxts.index(j))
                 for indx in pindxs:
                     sindex = int(indx.split('-')[0])
                     tindex = int(indx.split('-')[1])
-                    if postags[tindex][1] in locals()['{}_postags'.format(target)] and unk_count < 4:
+                    if tindex in co:
+                        stxts[sindex] = u"<unk2>"
+                        ptxts[tindex] = u"<unk2>"
+                        unk_count +=1
+                        continue
+
+                    if postags[tindex][1] in en_postags and unk_count < (unk_max - entity_num):
                         stxts[sindex] = u"<unk2>"
                         ptxts[tindex] = u"<unk2>"
                         unk_count += 1
@@ -162,15 +175,16 @@ def alignment_parse(slines,plines, output, master, target, capitalize):
             else:
                 outlines.append(post_sline+'\n')
             outlines.append(post_pline+'\n')
-        except :
+        except KeyError:
             print 'Get IndexError skip this line!'
             continue
-    fout = open(output,'w')
+        except ValueError:
+            print 'Get ValueError'
+            print ent
+            continue
+    fout =codecs.open(output,'w', 'utf-8')
     fout.writelines(outlines)
     fout.close()
-
-    postagger.release()
-    recognizer.release()
 
 def capitalize(line):
     text = line.split()
@@ -185,7 +199,7 @@ def display_usage():
     print >> sys.stderr, __doc__
 
 if __name__ == '__main__':
-    options,workers = {'encoding':'utf-8', 'master':'second','target':'zh', 'capitalize':False},[]
+    options,workers = {'encoding':'utf-8', 'master':'second','target':'en', 'capitalize':False},[]
     try:
         opts, args = getopt.getopt(sys.argv[1:], 's:p:o:h:m:t:c')
         for opt, arg in opts:
@@ -204,8 +218,11 @@ if __name__ == '__main__':
             elif opt == '-h':
                 display_usage()
                 sys.exit()
-        slines = open(options['sfile'], 'r').readlines()
-        plines = open(options['pfile'], 'r').readlines()
+        slines = codecs.open(options['sfile'], 'r', 'utf-8').readlines()
+        plines = codecs.open(options['pfile'], 'r', 'utf-8').readlines()
+
+        postagger = Postagger()
+        recognizer = NamedEntityRecognizer()
 
         if len(slines) != len(plines):
             print 'sfile lines must be equal pfile lines!!!'
@@ -214,14 +231,14 @@ if __name__ == '__main__':
         total_lines = len(slines)
 
         cpunum = min(total_lines,multiprocessing.cpu_count());
+        cpunum = 5
         blines = int(math.ceil(total_lines/cpunum));
-
         i = 0;
         while i < cpunum:
             sindex = int(i*blines);
             eindex = min((i+1)*blines, total_lines);
             pw = Process(target=alignment_parse, args = (slines[sindex:eindex], plines[sindex:eindex],options['output'] + '.' + str(i),
-                options['master'],options['target'],options['capitalize']), );
+                options['master'],options['target'],options['capitalize'], postagger, recognizer), );
             pw.daemon = True;
             pw.start();
             workers.append(pw);
@@ -242,17 +259,18 @@ if __name__ == '__main__':
 
         #merge all tmp files to output
         i = 0;
-        fout = open(options['output'], 'w')
-        #fout= codecs.open(options['output'],'w','utf-8')
+        #fout = open(options['output'], 'w')
+        fout= codecs.open(options['output'],'w','utf-8')
         while i < cpunum:
-            with open(options['output'] +'.'+ str(i),'r') as fin:
+            with codecs.open(options['output'] +'.'+ str(i),'r', 'utf-8') as fin:
                 tmp = fin.readlines()
                 fout.writelines(tmp)
             os.remove(options['output']+'.'+str(i))
             i= i+1
 
         fout.close()
-
+        postagger.release()
+        recognizer.release()
         print 'All things is processed ...'
     except getopt.GetoptError:
         display_usage()

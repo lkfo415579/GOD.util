@@ -13,7 +13,7 @@ TGTL=zh
 # data
 P=Bi-News-en-zh-filter
 # script folder
-P1=~/models/others/Medcine/en-zh_clean
+P1=~/GOD.util/BPE_TOOLKIT
 
 # learn BPE on joint vocabulary
 echo "Seprerate BPE VERSION"
@@ -25,6 +25,7 @@ echo "Applying BPE"
 python $P1/apply_bpe.py -c ${SRCL}.bpe < ${P}.${SRCL} > ${P}.bpe.${SRCL}
 python $P1/apply_bpe.py -c ${TGTL}.bpe < ${P}.${TGTL} > ${P}.bpe.${TGTL}
 
+# SHUFFLE
 NUM=30000
 CORPUS=${P}.bpe
 TERM=News
