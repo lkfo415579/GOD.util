@@ -27,5 +27,5 @@ P2=$BASEDIR
 cat ${P}.${S} | python $P2/learn_bpe.py -s $SIZE > ${S}.bpe
 cat ${P}.${T} | python $P2/learn_bpe.py -s $SIZE > ${T}.bpe
 
-#python $P2/original/apply_bpe.py --glossaries '<unk2>' -c ${S}.bpe < ${P}.${S} > ${P}.bpe.${S}
-#python $P2/original/apply_bpe.py --glossaries '<unk2>' -c ${T}.bpe < ${P}.${T} > ${P}.bpe.${T}
+#python $P2/apply_bpe.py --glossaries '<unk2>' -c ${S}.bpe < ${P}.${S} > ${P}.bpe.${S}
+#python $P2/apply_bpe.py --glossaries '<unk2>' -c ${T}.bpe < ${P}.${T} > ${P}.bpe.${T}

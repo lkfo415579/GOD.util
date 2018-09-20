@@ -18,7 +18,6 @@ cp $CORPUS.en $CORPUS.en-zh.tok.en
 $SUPER zh < $CORPUS.zh > $CORPUS.tok.zh
 # en->zh
 $UTIL_FOLDER/escape-special-chars.perl < $CORPUS.tok.zh > $CORPUS.en-zh.esc.zh
-# tr [:upper:] [:lower:] < $CORPUS.tok.en > $CORPUS.en-zh.tok.en
 mv $CORPUS.en-zh.esc.zh $CORPUS.en-zh.tok.zh
 # zh->en
 $UTIL_FOLDER/replace-unicode-punctuation.perl < $CORPUS.tok.zh > $CORPUS.replace.zh
