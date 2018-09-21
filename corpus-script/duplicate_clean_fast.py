@@ -5,8 +5,6 @@ from tqdm import tqdm
 
 s_lines = codecs.open(sys.argv[1], 'r', encoding='utf8').readlines()
 t_lines = codecs.open(sys.argv[2], 'r', encoding='utf8').readlines()
-
-
 s_big_map = {}
 
 
@@ -27,9 +25,12 @@ def find_match(big_map, lines):
         length = len(l)
         for tmp_tuple in big_map[length]:
             # (sent, index)
-            if tmp_tuple[0] == l:
+            if tmp_tuple[0] == l and index != tmp_tuple[1]:
                 # match bitch
                 matched.append((index, tmp_tuple[1]))
+        # debug
+        # if index > 1000:
+        #     break
     return matched
 
 
@@ -50,9 +51,8 @@ for i, match in enumerate(s_match):
             # both match
             record.append((match[0], match[1]))
             both.append(match[0])
-        else:
-            if match[0] > match_j[0]:
-                break
+        elif match[0] > match_j[0]:
+            break
 # output two no duplicate corpus
 print record[:5]
 print "Outputing final corpus"
@@ -62,8 +62,15 @@ t_output = codecs.open(sys.argv[2] + ".nodup", 'wa', encoding='utf8')
 record_f = codecs.open("tmp.record", 'wa', encoding='utf8')
 for tmp in record:
     record_f.write(str(tmp) + "\n")
-record_f.close()
+# record of matches
+s_f = codecs.open("tmp.record.s", 'wa', encoding='utf8')
+t_f = codecs.open("tmp.record.t", 'wa', encoding='utf8')
+for tmp in s_match:
+    s_f.write(str(tmp) + "\n")
+for tmp in t_match:
+    t_f.write(str(tmp) + "\n")
 #
+both = set(both)
 pbar = tqdm(total=len(s_lines))
 for i, l in enumerate(s_lines):
     if i % 1000 == 0:
