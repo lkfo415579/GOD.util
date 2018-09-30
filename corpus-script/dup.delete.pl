@@ -7,13 +7,13 @@
 binmode(STDIN, ":utf8");
 binmode(STDOUT, ":utf8");
 binmode(STDERR, ":utf8");
-use utf8; 
+use utf8;
 use LWP::Simple;
 use strict;
 use warnings;
 
-my $inputFile1 = "500w.ko-zh.ko";#######input NAME!!!!
-my $inputFile2 = "500w.ko-zh.zh";
+my $inputFile1 = $ARGV[0];#######input NAME!!!!
+my $inputFile2 = $ARGV[1];
 
 
 open E, "<:utf8", $inputFile1 or die $!;
