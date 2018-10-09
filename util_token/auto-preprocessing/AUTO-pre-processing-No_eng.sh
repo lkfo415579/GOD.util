@@ -15,10 +15,12 @@ echo "language order : en->zh && zh->en"
 $SUPER en < $CORPUS.en > $CORPUS.tok.en
 $SUPER zh < $CORPUS.zh > $CORPUS.tok.zh
 # en->zh
+# en-zh.en
 $UTIL_FOLDER/replace-unicode-punctuation.perl < $CORPUS.tok.en > $CORPUS.en-zh.esc.en
-mv $CORPUS.en-zh.esc.en $CORPUS.tok.en
-# tr [:upper:] [:lower:] < $CORPUS.tok.en > $CORPUS.en-zh.tok.en
-cp $CORPUS.tok.en $CORPUS.en-zh.tok.en
+mv $CORPUS.en-zh.esc.en $CORPUS.en-zh.tok.en
+# en-zh.zh
+$UTIL_FOLDER/escape-special-chars.perl < $CORPUS.tok.zh > $CORPUS.en-zh.esc.zh
+mv $CORPUS.en-zh.esc.zh $CORPUS.en-zh.tok.zh
 # zh->en
 $UTIL_FOLDER/replace-unicode-punctuation.perl < $CORPUS.tok.zh > $CORPUS.replace.zh
 $UTIL_FOLDER/escape-special-chars.perl < $CORPUS.replace.zh > $CORPUS.zh-en.esc.zh
