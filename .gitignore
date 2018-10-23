@@ -1,3 +1,4 @@
 *.pyc
 *.model
 mecab-dic
+tmp*
