@@ -4,8 +4,9 @@ import sys
 
 if len(sys.argv) < 2:
     print "Usage : python %s" % sys.argv[0], " source target len_factor=2"
-if len(sys.argv) < 3:
+if len(sys.argv) == 4:
     len_factor = float(sys.argv[3])
+    print "LEN_FACTOR:%f" % len_factor
 else:
     len_factor = 2
 
