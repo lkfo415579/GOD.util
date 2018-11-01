@@ -9,8 +9,8 @@ fi
 CORPUS=$1
 UTIL_FOLDER=~/GOD.util/util_token
 # GOD_FOLDER=~/GOD.util
-# SUPER="python /home/training/GOD.util/super_tokenizer/super_tokenizer.py"
-SUPER=/home/ubuntu/tools/super_tokenizer/super_tokenizer
+SUPER="python /home/training/GOD.util/super_tokenizer/super_tokenizer.py"
+# SUPER=/home/ubuntu/tools/super_tokenizer/super_tokenizer
 echo "language order : en->zh && zh->en"
 $SUPER en < $CORPUS.en > $CORPUS.tok.en
 $SUPER zh < $CORPUS.zh > $CORPUS.tok.zh

@@ -50,16 +50,16 @@ class BPE(object):
 
         self.vocab = vocab
 
-        #self.glossaries = glossaries if glossaries else []
-        self.glossaries = []
+        self.glossaries = glossaries if glossaries else []
+        #self.glossaries = []
         for i in xrange(10):
             self.glossaries.append("__URL"+str(i)+"__")
             self.glossaries.append("__EMAIL"+str(i)+"__")
         self.cache = {}
         #added by revo
-        self.__email_addr = Regex(r'([\w\.-]+@[\w\.-]+)')
+        #self.__email_addr = Regex(r'([\w\.-]+@[\w\.-]+)')
         # url address:
-        self.__url_addr = Regex(r'(?P<url>https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))')
+        #self.__url_addr = Regex(r'(?P<url>https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))')
 
     def segment(self, sentence):
         """segment single sentence (whitespace-tokenized string) with BPE encoding"""
