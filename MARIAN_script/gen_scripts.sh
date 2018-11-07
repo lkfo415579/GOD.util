@@ -1,8 +1,9 @@
-SRCL=ja
-TGTL=zh
-TERM=Common
-CORPUS=/data/ja-zh
+SRCL=en
+TGTL=ti
+TERM=News
+CORPUS=~/goblin
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
+rm -r tmp
 mkdir -p tmp
 cp train_en-zh.sh tmp/train_$SRCL-$TGTL.sh
 cp train_en-zh.sh tmp/train_$TGTL-$SRCL.sh
@@ -30,8 +31,9 @@ sed -i $TMP tmp/train_$SRCL-$TGTL.sh
 sed -i $TMP tmp/validate-$SRCL-$TGTL.sh
 sed -i $TMP tmp/train_$TGTL-$SRCL.sh
 sed -i $TMP tmp/validate-$TGTL-$SRCL.sh
-TMP='s/CORPUS_DIR=.*$/CORPUS_DIR='$CORPUS'/g'
+TMP='s/CORPUS_DIR=.*$/CORPUS_DIR='$CORPUS'\/'$SRCL-$TGTL'/g'
 sed -i $TMP tmp/train_$SRCL-$TGTL.sh
+TMP='s/CORPUS_DIR=.*$/CORPUS_DIR='$CORPUS'\/'$TGTL-$SRCL'/g'
 sed -i $TMP tmp/train_$TGTL-$SRCL.sh
 # GPUS
 sed -i 's/^GPUS=.*$/GPUS="0 1 2 3"/g' tmp/train_$SRCL-$TGTL.sh
