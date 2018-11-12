@@ -7,7 +7,7 @@ Created on 2016年3月28日
 import codecs
 import sys
 def remove_line(filename):
-    source_file = codecs.open(filename,'r','utf8')
+    source_file = codecs.open(filename,'r',encoding='utf8', errors='ignore')
     lines = source_file.read().split('\n')
     outfile = codecs.open(filename + '.without_external_line','w','utf8')
     for line in lines:

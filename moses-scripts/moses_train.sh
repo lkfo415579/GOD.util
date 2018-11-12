@@ -1,8 +1,8 @@
-corpus=train
-f=zh
-e=en
+corpus=train.clean
+f=en
+e=zh
 rootdir=moses-zh-en
-lm=/home/mb45450/junk
+lm=/home/training/LEXICON_WORKSHOP
 firststep=4
 laststep=4
 ~/mosesdecoder/scripts/training/train-model.perl \
@@ -13,4 +13,5 @@ laststep=4
 -reordering distance,msd-bidirectional-fe \
 -lm 0:5:$lm:9 \
 -first-step $firststep -last-step $laststep \
+-external-bin-dir ~/mosesdecoder/tools \
 -max-phrase-length 5

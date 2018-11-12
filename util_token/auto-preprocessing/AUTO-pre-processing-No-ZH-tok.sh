@@ -10,14 +10,14 @@ CORPUS=$1
 UTIL_FOLDER=~/GOD.util/util_token
 # GOD_FOLDER=~/GOD.util
 SUPER="python /home/training/GOD.util/super_tokenizer/super_tokenizer.py"
-# SUPER=~/GOD.util/super_tokenizer/dist/super_tokenizer/super_tokenizer
-echo "No eng tokenizer, language order : en->zh && zh->en"
-cp $CORPUS.en $CORPUS.tok.en
-cp $CORPUS.en $CORPUS.en-zh.tok.en
-# $SUPER en < $CORPUS.en > $CORPUS.tok.en
-$SUPER zh < $CORPUS.zh > $CORPUS.tok.zh
+# SUPER=/home/ubuntu/tools/super_tokenizer/super_tokenizer
+echo "language order : en->zh && zh->en"
+$SUPER en < $CORPUS.en > $CORPUS.tok.en
+# $SUPER zh < $CORPUS.zh > $CORPUS.tok.zh
+cp $CORPUS.zh $CORPUS.tok.zh
 # en->zh
 $UTIL_FOLDER/escape-special-chars.perl < $CORPUS.tok.zh > $CORPUS.en-zh.esc.zh
+tr [:upper:] [:lower:] < $CORPUS.tok.en > $CORPUS.en-zh.tok.en
 mv $CORPUS.en-zh.esc.zh $CORPUS.en-zh.tok.zh
 # zh->en
 $UTIL_FOLDER/replace-unicode-punctuation.perl < $CORPUS.tok.zh > $CORPUS.replace.zh

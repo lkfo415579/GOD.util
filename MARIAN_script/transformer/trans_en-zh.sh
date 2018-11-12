@@ -44,7 +44,7 @@ fi
         --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
         --valid-metrics ce-mean-words perplexity translation \
         --valid-sets $CORPUS_DIR/$DEV_SET.$SRCL $CORPUS_DIR/$DEV_SET.$TGTL \
-        --valid-script-path ./validate_$SRCL$TGTL.sh \
+        --valid-script-path ./validate_$SRCL-$TGTL.sh \
         --valid-translation-output $CORPUS_DIR/$DEV_SET.2.output --quiet-translation \
         --valid-mini-batch 64 \
         --beam-size 6 --normalize 0.6 \

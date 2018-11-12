@@ -19,14 +19,14 @@ P1=~/GOD.util/BPE_TOOLKIT
 echo "Seprerate BPE VERSION"
 echo "EMAIL&URL APPLY BPE"
 echo "Learning BPE"
-cat ${P}.${SRCL} | python $P1/learn_bpe.py -s 70000 > ${SRCL}.bpe
-cat ${P}.${TGTL} | python $P1/learn_bpe.py -s 70000 > ${TGTL}.bpe
+cat ${P}.${SRCL} | python $P1/learn_bpe.py -s 32000 > ${SRCL}.bpe
+cat ${P}.${TGTL} | python $P1/learn_bpe.py -s 32000 > ${TGTL}.bpe
 echo "Applying BPE"
 python $P1/apply_bpe.py -c ${SRCL}.bpe < ${P}.${SRCL} > ${P}.bpe.${SRCL}
 python $P1/apply_bpe.py -c ${TGTL}.bpe < ${P}.${TGTL} > ${P}.bpe.${TGTL}
 
 # SHUFFLE
-NUM=30000
+NUM=10000
 CORPUS=${P}.bpe
 TERM=News
 paste -d $'\t' $CORPUS.$SRCL $CORPUS.$TGTL | shuf > $CORPUS.shuf

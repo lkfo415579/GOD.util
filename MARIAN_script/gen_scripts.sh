@@ -1,7 +1,7 @@
 SRCL=en
-TGTL=ti
-TERM=News
-CORPUS=~/goblin
+TGTL=zh
+TERM=Engine
+CORPUS=/data/workshop/jixiegongcheng
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
 rm -r tmp
 mkdir -p tmp
