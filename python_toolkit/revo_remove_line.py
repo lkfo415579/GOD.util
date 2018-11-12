@@ -6,9 +6,11 @@ Created on 2016年3月28日
 '''
 import codecs
 import sys
-def remove_line(filename,out):
-    source_file = codecs.open(filename,'r','utf8')
-    outfile = codecs.open(out,'w','utf8')
+
+
+def remove_line(filename, out):
+    source_file = codecs.open(filename, 'r', 'utf8')
+    outfile = codecs.open(out, 'w', 'utf8')
     index = 0
     while(1):
         index += 1
@@ -19,12 +21,13 @@ def remove_line(filename,out):
         wrtstr = ''
         mutilines = line.splitlines()
         if len(mutilines) > 1:
-            print "JESUS:",len(mutilines)
-            print "INDEX:",index
+            print "JESUS:", len(mutilines)
+            print "INDEX:", index
         for l in mutilines:
             wrtstr += l + ' '
         outfile.write(wrtstr.strip() + '\n')
 
+
 if __name__ == '__main__':
     argv = sys.argv[1]
-    remove_line(argv,sys.argv[2])
+    remove_line(argv, sys.argv[2])

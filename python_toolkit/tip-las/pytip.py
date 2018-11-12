@@ -11,6 +11,7 @@ sys.setdefaultencoding('utf-8')
 
 class Las_Tokenizer(object):
     """docstring for Las_Tokenizer."""
+
     def __init__(self, model_path="./"):
         pytip.init(model_path)
 
@@ -26,7 +27,6 @@ if __name__ == '__main__':
     else:
         PYTIP = Las_Tokenizer(sys.argv[1])
 
-
     for sent in sys.stdin:
         result = PYTIP.tokenize(sent)
-        sys.stdout.write(result.strip()+"\n")
+        sys.stdout.write(result.strip() + "\n")

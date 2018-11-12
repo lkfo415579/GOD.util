@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
+from tornado.concurrent import run_on_executor
+import concurrent.futures
 '''
    @Brief : Language detect server...
    @Modify : 2017/12/07 Edited By Revo, tornado server
@@ -50,19 +52,17 @@ def build_task(params):
     try:
         if top.strip() == "":
             task["top"] = None
-    except:
+    except BaseException:
         pass
     return task
-#--> end->Func: build_task
+# --> end->Func: build_task
 
 
-#-------------------------------------------------------------------------------
-#--@brief: NMT server class...
-#--
-#--@param: logfile, ...
-#-------------------------------------------------------------------------------
-import concurrent.futures
-from tornado.concurrent import run_on_executor
+# -------------------------------------------------------------------------------
+# --@brief: NMT server class...
+# --
+# --@param: logfile, ...
+# -------------------------------------------------------------------------------
 
 
 class Server(tornado.web.RequestHandler):
@@ -120,7 +120,7 @@ class Server(tornado.web.RequestHandler):
                 #task = json.loads( self.request.body.encode('utf-8'))
                 task = json.loads(self.request.body)
                 task = build_task(task)
-            except:
+            except BaseException:
                 task = None
         elif "application/x-www-form-urlencoded" in self.request.headers["Content-Type"]:
             task = {
@@ -136,10 +136,10 @@ class Server(tornado.web.RequestHandler):
                 },
             }
             validictory.validate(task, task_schema)
-        except:
+        except BaseException:
             task = None
 
-        if (task is not None) and task.has_key('text'):
+        if (task is not None) and 'text' in task:
             #-- Initiazation --#
             # concurrent,use future.result()
             result = self.lang_detect(task).result(300)
@@ -158,9 +158,9 @@ class Server(tornado.web.RequestHandler):
 #--end->Class: Server --#
 
 
-#-------------------------------------------------------------------------------
-#--@biref: Server process instance...
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
+# --@biref: Server process instance...
+# -------------------------------------------------------------------------------
 def main():
     #-- set up logging --#
     logging.basicConfig(level=logging.DEBUG,
@@ -182,8 +182,8 @@ def main():
 #--end->Func: main --#
 
 
-#-------------------------------------------------------------------------------
-#-- The Server process main instance, do there and running...
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
+# -- The Server process main instance, do there and running...
+# -------------------------------------------------------------------------------
 if __name__ == "__main__":
     main()

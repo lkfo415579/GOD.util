@@ -12,17 +12,17 @@ Library usage:
 
 Command-line usage:
 
-    ./tokenize.py [-h] [-l] [-e ENCODING] [-m] [-f FACTOR-NUM] \\ 
+    ./tokenize.py [-h] [-l] [-e ENCODING] [-m] [-f FACTOR-NUM] \\
                   [input-file output-file]
-    
+
     -h = display this help
     -l = lowercase everything
     -e = use the given encoding (default: UTF-8)
     -m = escape characters that are special to Moses
-    -f = treat input as pre-tokenized factors (separated by `|'), 
+    -f = treat input as pre-tokenized factors (separated by `|'),
          split it further according to the given factor (numbered from 0)
     -t = threads when processing
-    
+
     If no input and output files are given, the tokenizer will read
     STDIN and write to STDOUT.
 """
@@ -47,7 +47,7 @@ class Tokenizer(object):
     """
 
     # Moses special characters escaping
-    ESCAPES = [('&', '&amp;'), # must go first to prevent double escaping!
+    ESCAPES = [('&', '&amp;'),  # must go first to prevent double escaping!
                ('|', '&bar;'),
                ('<', '&lt;'),
                ('>', '&gt;'),
@@ -66,11 +66,12 @@ class Tokenizer(object):
         self.__spaces = Regex(r'\s+', flags=UNICODE)
         self.__ascii_junk = Regex(r'[\000-\037]')
         self.__special_chars = \
-                Regex(r'(([^\p{IsAlnum}\s\.\,−\-])\2*)')
-        # email address: 
+            Regex(r'(([^\p{IsAlnum}\s\.\,−\-])\2*)')
+        # email address:
         self.__email_addr = Regex(r'([\w\.-]+@[\w\.-]+)')
         # url address:
-        self.__url_addr = Regex(r'(?P<url>https?://[a-zA-Z0-9:/\.?=!@$#&\*_()]+|www\.\w+\.[a-zA-Z0-9:/\.?=!@$#&\*_()]+|\w+\.\w+)')
+        self.__url_addr = Regex(
+            r'(?P<url>https?://[a-zA-Z0-9:/\.?=!@$#&\*_()]+|www\.\w+\.[a-zA-Z0-9:/\.?=!@$#&\*_()]+|\w+\.\w+)')
         # NEED TO PROTECT THIS EMAIL ADDRESS, EXTRACT IT AND TEHN INSERT BACK
 
         # single quotes: all unicode quotes + prime
@@ -87,7 +88,7 @@ class Tokenizer(object):
 
     def tokenize_factors(self, pretoks, factor_no=0):
         """\
-        Further tokenize a list of factored tokens (separated by "|"), 
+        Further tokenize a list of factored tokens (separated by "|"),
         separating the given factor and copying the other factor to all its
         parts.
         """
@@ -127,11 +128,11 @@ class Tokenizer(object):
         return text
 
     def preserve_url(self, text):
-    	'''
-    	Preserve url address with "__url_addr__" for later recovery.
-    	'''
-    	self.__urls = self.__url_addr.findall(text)
-    	return self.__url_addr.sub("__url_addr__", text)
+        '''
+        Preserve url address with "__url_addr__" for later recovery.
+        '''
+        self.__urls = self.__url_addr.findall(text)
+        return self.__url_addr.sub("__url_addr__", text)
 
     def recover_url(self, text):
         '''
@@ -143,11 +144,11 @@ class Tokenizer(object):
         return text
 
     def preserve_punc(self, text):
-    	self.__puncs = self.__punc_str.findall(text)
-    	return self.__punc_str.sub("__punc_str__", text)
+        self.__puncs = self.__punc_str.findall(text)
+        return self.__punc_str.sub("__punc_str__", text)
 
     def recover_punc(self, text):
-    	for i in xrange(len(self.__puncs)):
+        for i in xrange(len(self.__puncs)):
             text = text.replace("__ punc _ str __", self.__puncs[i], 1)
         del self.__puncs
         return text
@@ -196,6 +197,7 @@ class Tokenizer(object):
 
         return text
 
+
 def display_usage():
     """\
     Display program usage information.
@@ -230,5 +232,5 @@ if __name__ == '__main__':
     # process the input
     tok = Tokenizer(options)
     proc_func = tok.tokenize if factor is None else \
-            lambda text: tok.tokenize_factored_text(text, factor)
+        lambda text: tok.tokenize_factored_text(text, factor)
     process_lines(proc_func, filenames, encoding)

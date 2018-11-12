@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+from pythainlp.tokenize import word_tokenize
 import codecs
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
-from pythainlp.tokenize import word_tokenize
 
 sys.stdin = codecs.getreader('UTF-8')(sys.stdin)
 sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)

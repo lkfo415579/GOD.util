@@ -45,4 +45,4 @@ for line in trans_file:
             else:
                 line[POS] = source_line[align[POS]]
     # print " ".join(line)
-    sys.stdout.write(" ".join(line)+"\n")
+    sys.stdout.write(" ".join(line) + "\n")

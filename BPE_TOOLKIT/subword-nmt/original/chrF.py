@@ -22,9 +22,9 @@ argparse.open = open
 
 # python 2/3 compatibility
 if sys.version_info < (3, 0):
-  sys.stderr = codecs.getwriter('UTF-8')(sys.stderr)
-  sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
-  sys.stdin = codecs.getreader('UTF-8')(sys.stdin)
+    sys.stderr = codecs.getwriter('UTF-8')(sys.stderr)
+    sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
+    sys.stdin = codecs.getreader('UTF-8')(sys.stdin)
 
 
 def create_parser():
@@ -60,6 +60,7 @@ def create_parser():
 
     return parser
 
+
 def extract_ngrams(words, max_length=4, spaces=False):
 
     if not spaces:
@@ -82,7 +83,8 @@ def get_correct(ngrams_ref, ngrams_test, correct, total):
         for chain in ngrams_test[rank]:
             total[rank] += ngrams_test[rank][chain]
             if chain in ngrams_ref[rank]:
-                correct[rank] += min(ngrams_test[rank][chain], ngrams_ref[rank][chain])
+                correct[rank] += min(ngrams_test[rank]
+                                     [chain], ngrams_ref[rank][chain])
 
     return correct, total
 
@@ -93,39 +95,45 @@ def f1(correct, total_hyp, total_ref, max_length, beta=3, smooth=0):
     recall = 0
 
     for i in range(max_length):
-      if total_hyp[i] + smooth and total_ref[i] + smooth:
-        precision += (correct[i] + smooth) / (total_hyp[i] + smooth)
-        recall += (correct[i] + smooth) / (total_ref[i] + smooth)
+        if total_hyp[i] + smooth and total_ref[i] + smooth:
+            precision += (correct[i] + smooth) / (total_hyp[i] + smooth)
+            recall += (correct[i] + smooth) / (total_ref[i] + smooth)
 
     precision /= max_length
     recall /= max_length
 
-    return (1 + beta**2) * (precision*recall) / ((beta**2 * precision) + recall), precision, recall
+    return (1 + beta**2) * (precision * recall) / \
+        ((beta**2 * precision) + recall), precision, recall
+
 
 def main(args):
 
-    correct = [0]*args.ngram
-    total = [0]*args.ngram
-    total_ref = [0]*args.ngram
+    correct = [0] * args.ngram
+    total = [0] * args.ngram
+    total_ref = [0] * args.ngram
     for line in args.ref:
-      line2 = args.hyp.readline()
+        line2 = args.hyp.readline()
 
-      ngrams_ref = extract_ngrams(line, max_length=args.ngram, spaces=args.space)
-      ngrams_test = extract_ngrams(line2, max_length=args.ngram, spaces=args.space)
+        ngrams_ref = extract_ngrams(
+            line, max_length=args.ngram, spaces=args.space)
+        ngrams_test = extract_ngrams(
+            line2, max_length=args.ngram, spaces=args.space)
 
-      get_correct(ngrams_ref, ngrams_test, correct, total)
+        get_correct(ngrams_ref, ngrams_test, correct, total)
 
-      for rank in ngrams_ref:
-          for chain in ngrams_ref[rank]:
-              total_ref[rank] += ngrams_ref[rank][chain]
+        for rank in ngrams_ref:
+            for chain in ngrams_ref[rank]:
+                total_ref[rank] += ngrams_ref[rank][chain]
 
-    chrf, precision, recall = f1(correct, total, total_ref, args.ngram, args.beta)
+    chrf, precision, recall = f1(
+        correct, total, total_ref, args.ngram, args.beta)
 
     print('chrF3: {0:.4f}'.format(chrf))
     if args.precision:
         print('chrPrec: {0:.4f}'.format(precision))
     if args.recall:
         print('chrRec: {0:.4f}'.format(recall))
+
 
 if __name__ == '__main__':
 

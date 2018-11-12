@@ -2,3 +2,4 @@
 *.model
 mecab-dic
 tmp*
+.*

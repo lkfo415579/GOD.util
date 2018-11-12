@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 #print "Author: REVo, 12/12/2017,gm0648@hotmail.com"
+import logging
+from corenlp_revo import StanfordCoreNLP
+import multiprocessing
+import codecs
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
-import codecs
-import multiprocessing
 
 #
 if (sys.argv[1] == '-h'):
     print "usage: python NER_replacer.py [en|zh] [NUM_processes] < input "
-    sys.exit()#
-from corenlp_revo import StanfordCoreNLP
+    sys.exit()
 #
 try:
     lang = sys.argv[1]
-except:
+except BaseException:
     lang = 'en'
 
 if lang == 'en':
@@ -25,7 +26,7 @@ else:
 
 try:
     totoal_cpu = int(sys.argv[2])
-except:
+except BaseException:
     totoal_cpu = multiprocessing.cpu_count()
 
 
@@ -42,23 +43,23 @@ except:
 def convert_NER(coreNLP_output):
     sentence = ""
     for sent in coreNLP_output['sentences']:
-        for index,token in enumerate(sent['tokens']):
+        for index, token in enumerate(sent['tokens']):
             if 'normalizedNER' in token and token['ner'] != 'ORDINAL':
-                #got a !
+                # got a !
                 now_NER = token['normalizedNER']
                 #print "DEBUG:NER:",now_NER
                 list_del = []
-                for x in range(index+1,len(sent['tokens'])):
+                for x in range(index + 1, len(sent['tokens'])):
                     if 'normalizedNER' in sent['tokens'][x]:
                         if now_NER == sent['tokens'][x]['normalizedNER']:
-                            #same
+                            # same
                             list_del.append(x)
                     else:
                         break
-                for index,ele in enumerate(list_del):
-                    del sent['tokens'][ele-index]
+                for index, ele in enumerate(list_del):
+                    del sent['tokens'][ele - index]
 
-                #finished processing
+                # finished processing
                 if 'before' in token:
                     sentence += token['before'] + token['normalizedNER']
                 else:
@@ -76,27 +77,30 @@ def convert_NER(coreNLP_output):
     #print "sentence:",sentence
     return sentence
 
+
 #NER_text = convert_NER(output)
 #print "NER_text:",NER_text
 #print output
-import logging
+
+
 def batch_NER_process(source_list):
     tmp_sentences = []
     tmp_index = [ele[0] for ele in source_list]
-    for index,ele in enumerate(source_list):
+    for index, ele in enumerate(source_list):
         sentence = ele[1]
         NER_output = nlp.annotate(sentence, properties=properties)
-        tmp_sentences.append(convert_NER(NER_output).strip()+"\n")
-    return tmp_index,tmp_sentences
+        tmp_sentences.append(convert_NER(NER_output).strip() + "\n")
+    return tmp_index, tmp_sentences
+
 
 if __name__ == '__main__':
     sys.stdin = codecs.getreader('utf-8')(sys.stdin)
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
-    properties={
-    'annotators': 'tokenize,ssplit,pos,lemma,ner',
-    'outputFormat': 'json'
+    properties = {
+        'annotators': 'tokenize,ssplit,pos,lemma,ner',
+        'outputFormat': 'json'
     }
-    #read whole file
+    # read whole file
     #print "Starting reading files"
     # index = 0
     # while True:
@@ -109,14 +113,14 @@ if __name__ == '__main__':
     #     index+=1
     #     #if not(index % 1000):
     #     #    print "current line :",index
-    #multiprocessing
+    # multiprocessing
     #SIZE = 500000
     #logging.basicConfig(filename='logger.log', level=logging.INFO)
     SIZE = 50000
     BATCH = 0
     BREAK = True
     while(BREAK):
-        logging.critical("BATCH:"+str(BATCH))
+        logging.critical("BATCH:" + str(BATCH))
         BATCH += 1
         #
         source = []
@@ -127,32 +131,32 @@ if __name__ == '__main__':
                 break
             source.append(line)
         #
-        for index,sen in enumerate(source):
-            source[index] = (index,sen)
-        #generate multiprocessing data
+        for index, sen in enumerate(source):
+            source[index] = (index, sen)
+        # generate multiprocessing data
         privot = len(source) / totoal_cpu
         source_list = [None] * totoal_cpu
-        for cpu_id in range(0,totoal_cpu-1):
-            source_list[cpu_id] = source[cpu_id*privot:(cpu_id+1)*privot]
-        source_list[-1] = source[(totoal_cpu-1)*privot:]
+        for cpu_id in range(0, totoal_cpu - 1):
+            source_list[cpu_id] = source[cpu_id * privot:(cpu_id + 1) * privot]
+        source_list[-1] = source[(totoal_cpu - 1) * privot:]
         #
         p = multiprocessing.Pool(processes=totoal_cpu)
-        result = p.map(batch_NER_process,source_list)
+        result = p.map(batch_NER_process, source_list)
         p.close()
         logging.critical("Finished One BATCH")
-        #write files
+        # write files
         #final_sentences = []
         final_tuple = []
         for process_data in result:
-            for index,index_sent in enumerate(process_data[0]):
-                final_tuple.append((index_sent,process_data[1][index]))
-        #resort all sentence by id
-        final_tuple = sorted(final_tuple, key=lambda x:x[0])
+            for index, index_sent in enumerate(process_data[0]):
+                final_tuple.append((index_sent, process_data[1][index]))
+        # resort all sentence by id
+        final_tuple = sorted(final_tuple, key=lambda x: x[0])
         for TUPLE in final_tuple:
             sys.stdout.write(TUPLE[1])
-        #sys.exit()
+        # sys.exit()
         #print final_sentences[480:520]
-            #tuple(index_list,sentences),they are sorted already
-            #for sentence in process_data[1]:
+            # tuple(index_list,sentences),they are sorted already
+            # for sentence in process_data[1]:
             #    sys.stdout.write(sentence)
-        #DONE one BATCH
+        # DONE one BATCH

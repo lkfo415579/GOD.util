@@ -47,7 +47,7 @@ class Tokenizer(object):
     """
 
     # Moses special characters escaping
-    ESCAPES = [('&', '&amp;'), # must go first to prevent double escaping!
+    ESCAPES = [('&', '&amp;'),  # must go first to prevent double escaping!
                ('|', '&bar;'),
                ('<', '&lt;'),
                ('>', '&gt;'),
@@ -66,11 +66,12 @@ class Tokenizer(object):
         self.__spaces = Regex(r'\s+', flags=UNICODE)
         self.__ascii_junk = Regex(r'[\000-\037]')
         self.__special_chars = \
-                Regex(r'(([^\p{IsAlnum}\s\.\,−\-])\2*)')
+            Regex(r'(([^\p{IsAlnum}\s\.\,−\-])\2*)')
         # email address:
         self.__email_addr = Regex(r'([\w\.-]+@[\w\.-]+)')
         # url address:
-        self.__url_addr = Regex(r'(?P<url>https?://[a-zA-Z0-9:/\.?=!@$#&\*_()]+|www\.\w+\.[a-zA-Z0-9:/\.?=!@$#&\*_()]+|\w+\.\w+)')
+        self.__url_addr = Regex(
+            r'(?P<url>https?://[a-zA-Z0-9:/\.?=!@$#&\*_()]+|www\.\w+\.[a-zA-Z0-9:/\.?=!@$#&\*_()]+|\w+\.\w+)')
         # NEED TO PROTECT THIS EMAIL ADDRESS, EXTRACT IT AND TEHN INSERT BACK
 
         # single quotes: all unicode quotes + prime
@@ -196,6 +197,7 @@ class Tokenizer(object):
 
         return text
 
+
 def display_usage():
     """\
     Display program usage information.
@@ -230,5 +232,5 @@ if __name__ == '__main__':
     # process the input
     tok = Tokenizer(options)
     proc_func = tok.tokenize if factor is None else \
-            lambda text: tok.tokenize_factored_text(text, factor)
+        lambda text: tok.tokenize_factored_text(text, factor)
     process_lines(proc_func, filenames, encoding)

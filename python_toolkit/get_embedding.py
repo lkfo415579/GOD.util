@@ -30,13 +30,13 @@ for filename in args.model:
         print (m['Wemb'])
         print ("Len:")
         print (len(m['Wemb']))
-        print ("Len of single :",len(m['Wemb'][0]))
+        print ("Len of single :", len(m['Wemb'][0]))
         output = m['Wemb']
-        print ("200:",m['Wemb'][38140:38200])
+        print ("200:", m['Wemb'][38140:38200])
         for k in m:
-            print ("key:",k)
+            print ("key:", k)
 
-#sys.exit()
+# sys.exit()
 # Actual averaging.
 # for k in average:
 #     if "special" not in k:

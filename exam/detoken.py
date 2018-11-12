@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
+import codecs
 """
 A simple de-tokenizer for MT post-processing.
 
@@ -23,7 +24,6 @@ import sys
 import getopt
 reload(sys)
 sys.setdefaultencoding('utf8')
-import codecs
 
 __author__ = "Liang Tian,REVO"
 __date__ = "2017/10/26, 2018/1/12, 2018/3/13"
@@ -92,12 +92,14 @@ class Detokenizer(object):
         except KeyError:
             self.language = 'en'
         # print "WTF,",self.language
-        self.capitalize_sents = True if options.get('capitalize_sents') else False
+        self.capitalize_sents = True if options.get(
+            'capitalize_sents') else False
         # compile regexes
         # shuffix_space
         self.__currency_or_init_punct = Regex(r'^[\p{Sc}\[\{\¿\¡]+$')
         # prefix_space, added ( （ ）, removed (
-        self.__noprespace_punct = Regex(r'^[\（\）\/\<\>\,\，\、\。\：\；\.\?\!\:\;\\\%\}\]\)\‰]+$')
+        self.__noprespace_punct = Regex(
+            r'^[\（\）\/\<\>\,\，\、\。\：\；\.\?\!\:\;\\\%\}\]\)\‰]+$')
         self.__cjk_chars = Regex(r'[\u1100-\u11FF\u2E80-\uA4CF\uA840-\uA87F' +
                                  r'\uAC00-\uD7AF\uF900-\uFAFF\uFE30-\uFE4F' + r'\uFF65-\uFFDC]')
         self.__final_punct = Regex(r'([\.!?])([\'\"\)\]\p{Pf}\%])*$')
@@ -117,7 +119,8 @@ class Detokenizer(object):
         # liangss chinese character detokenize
         # self.__noprespace_punct_chinese = Regex(r'^[\，\。\？\！\\\%\\]\)]+$')
         if self.language in self.CONTRACTIONS:
-            self.__contract = Regex(self.CONTRACTIONS[self.language], IGNORECASE)
+            self.__contract = Regex(
+                self.CONTRACTIONS[self.language], IGNORECASE)
 
     def detokenize(self, text):
         """\
@@ -150,7 +153,8 @@ class Detokenizer(object):
                 elif self.__currency_or_init_punct.match(word):
                     text += pre_spc + word
                     pre_spc = ''
-                # no space before commas etc. (exclude some punctuation for French)
+                # no space before commas etc. (exclude some punctuation for
+                # French)
                 elif self.__noprespace_punct.match(word) and (
                         self.language != 'fr' or not self.__fr_prespace_punct.match(word)):
                     text += word

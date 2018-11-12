@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import MeCab
 import codecs
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
-import MeCab
 
 sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
 if sys.argv[1] == '-h':

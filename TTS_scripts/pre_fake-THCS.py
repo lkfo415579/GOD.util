@@ -19,7 +19,9 @@ def text2pinyin(sent):
     testing_text = " ".join(tmp)
     return testing_text
 
+
 symbols = [u"？", u"、", u"。"]
+
 
 def clean_symbols(sent):
     for sym in symbols:
@@ -42,7 +44,13 @@ for wav in tqdm(wavs_list):
     p = clean_symbols(p)
     # write into dataset folder
     wav_name = wav.split("/")[1]
-    f = codecs.open(dataset_folder + "/" + wav_name + ".trn", 'w', encoding="utf8")
+    f = codecs.open(
+        dataset_folder +
+        "/" +
+        wav_name +
+        ".trn",
+        'w',
+        encoding="utf8")
     f.write(line + "\n")
     f.write(p + "\n")
     f.close()

@@ -10,4 +10,4 @@ sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
 sys.stdin = codecs.getreader('UTF-8')(sys.stdin)
 
 for line in sys.stdin:
-    sys.stdout.write(__UNK.sub("<unk2>", line).strip()+"\n")
+    sys.stdout.write(__UNK.sub("<unk2>", line).strip() + "\n")

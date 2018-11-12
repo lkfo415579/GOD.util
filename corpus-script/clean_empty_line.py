@@ -9,7 +9,7 @@ while(1):
         line = sys.stdin.readline()
         if not line:
             break
-    except:
+    except BaseException:
         continue
     # print ("C:", c)
     c += 1

@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from apply_bpe import isolate_glossary, BPE
 import unittest
 import mock
 import re
 
-import os,sys,inspect
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+import os
+import sys
+import inspect
+currentdir = os.path.dirname(
+    os.path.abspath(
+        inspect.getfile(
+            inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
-sys.path.insert(0,parentdir) 
+sys.path.insert(0, parentdir)
 
-from apply_bpe import isolate_glossary, BPE
 
 class TestIsolateGlossaryFunction(unittest.TestCase):
 
@@ -64,10 +69,11 @@ class TestIsolateGlossaryFunction(unittest.TestCase):
         test_case = (orig, exp)
         self._run_test_case(test_case)
 
+
 class TestBPEIsolateGlossariesMethod(unittest.TestCase):
 
     def setUp(self):
-        
+
         amock = mock.MagicMock()
         amock.readline.return_value = 'something'
         glossaries = ['like', 'Manuel', 'USA']
@@ -80,21 +86,31 @@ class TestBPEIsolateGlossariesMethod(unittest.TestCase):
 
     def test_multiple_glossaries(self):
         orig = 'wordlikeUSAwordManuelManuelwordUSA'
-        exp = ['word', 'like', 'USA', 'word', 'Manuel', 'Manuel', 'word', 'USA']
+        exp = [
+            'word',
+            'like',
+            'USA',
+            'word',
+            'Manuel',
+            'Manuel',
+            'word',
+            'USA']
         test_case = (orig, exp)
         self._run_test_case(test_case)
+
 
 def encode_mock(segment, x2, x3, x4, x5, x6, glosses):
     if segment in glosses:
         return (segment,)
     else:
         l = len(segment)
-        return (segment[:l/2], segment[l/2:])
+        return (segment[:l / 2], segment[l / 2:])
+
 
 class TestBPESegmentMethod(unittest.TestCase):
 
     def setUp(self):
-        
+
         amock = mock.MagicMock()
         amock.readline.return_value = 'something'
         glossaries = ['like', 'Manuel', 'USA']
@@ -113,6 +129,7 @@ class TestBPESegmentMethod(unittest.TestCase):
         exp = 'wo@@ rd@@ like@@ wo@@ rd like@@ Manuel@@ wo@@ rd'
         test_case = (orig, exp)
         self._run_test_case(test_case)
+
 
 if __name__ == '__main__':
     unittest.main()
