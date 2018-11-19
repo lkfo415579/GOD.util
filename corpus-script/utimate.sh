@@ -1,5 +1,5 @@
-SRCL=es
-TGTL=zh
+SRCL=en
+TGTL=hi
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
 # 1
@@ -22,7 +22,12 @@ mv all.$TGTL.without_external_line all.$TGTL
 # 4
 echo "4. clean double length sents"
 # chinese
-python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 0
+if [ $TGTL == 'zh' ]
+then
+    python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 0
+else
+    python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
+fi
 # en-es
 # python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
 mv all.$SRCL.clean all.$SRCL
@@ -37,7 +42,12 @@ mv all.filter.$TGTL all.$TGTL
 echo "6. util auto processing"
 mv all.$SRCL all.en
 mv all.$TGTL all.zh
-$SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing.sh all
+if [ $TGTL == 'zh' ]
+then
+    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing.sh all
+else
+    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
+fi
 # 7
 echo "7. BPE"
 mv all.en-zh.clean.en corpus.$SRCL-$TGTL.$SRCL
@@ -68,7 +78,6 @@ mv pre.sh $TGTL-$SRCL/
 # remove previous data
 cd $SRCL-$TGTL && ./pre.sh &
 P1=$!
-cd ../
 cd $TGTL-$SRCL && ./pre.sh &
 P2=$!
 wait $P1 $P2
