@@ -37,7 +37,7 @@ mv all.$TGTL.clean all.$TGTL
 # 5
 echo "5. clean language pair err"
 # en-zh
-if [$FILTER ]
+if [ $FILTER ]
 then
     python $SCRIPT/../python_toolkit/pair_lang_filter.py all $TGTL $SRCL all.filter
     mv all.filter.$SRCL all.$SRCL

@@ -17,7 +17,6 @@ if len(sys.argv) > 4:
     t_count = int(sys.argv[5])
 # display parameter
 print "S_count:%d, T_count:%d" % (s_count, t_count)
-
 f1 = codecs.open(sys.argv[1], 'r', encoding='utf8').readlines()
 f2 = codecs.open(sys.argv[2], 'r', encoding='utf8').readlines()
 
@@ -41,12 +40,14 @@ for index, line in enumerate(f1):
     else:
         t_len = len(line2)
     #
-    if s_len < len_factor * t_len and t_len < len_factor * s_len:
+    larger = max(s_len, t_len)
+    smaller = min(s_len, t_len)
+    if larger - smaller <= smaller * len_factor:
         f1_out.write(line + '\n')
         f2_out.write(line2 + '\n')
     else:
         err += 1
-        err_out.write(line + " ||| " + line2 + '\n')
+        err_out.write(line + " ||| " + line2 + " ||| %d-%d" % (s_len, t_len)  +'\n')
         # debug
     #     print t_len
     #     print '---'
