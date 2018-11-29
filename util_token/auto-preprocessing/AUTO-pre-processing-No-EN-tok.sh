@@ -7,9 +7,10 @@ if [ "$1" == "-h"  ]; then
 fi
 
 CORPUS=$1
+TOKENIZER=~/GOD.util/super_tokenizer/super_tokenizer.py
 UTIL_FOLDER=~/GOD.util/util_token
 # GOD_FOLDER=~/GOD.util
-SUPER="python ~/GOD.util/super_tokenizer/super_tokenizer.py"
+SUPER="python "$TOKENIZER
 # SUPER=~/GOD.util/super_tokenizer/dist/super_tokenizer/super_tokenizer
 echo "No eng tokenizer, language order : en->zh && zh->en"
 cp $CORPUS.en $CORPUS.tok.en
