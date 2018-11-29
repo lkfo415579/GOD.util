@@ -1,7 +1,9 @@
 SRCL=en
-TGTL=hi
+TGTL=de
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
+FILTER=true
+echo "0. SRCL:"$SRCL" TGTL:"$TGTL
 # 1
 echo "1. duplicated clean"
 $SCRIPT/dup.delete.pl all.$SRCL all.$TGTL
@@ -35,9 +37,12 @@ mv all.$TGTL.clean all.$TGTL
 # 5
 echo "5. clean language pair err"
 # en-zh
-python $SCRIPT/../python_toolkit/pair_lang_filter.py all $TGTL $SRCL all.filter
-mv all.filter.$SRCL all.$SRCL
-mv all.filter.$TGTL all.$TGTL
+if [$FILTER ]
+then
+    python $SCRIPT/../python_toolkit/pair_lang_filter.py all $TGTL $SRCL all.filter
+    mv all.filter.$SRCL all.$SRCL
+    mv all.filter.$TGTL all.$TGTL
+fi
 # 6
 echo "6. util auto processing"
 mv all.$SRCL all.en
@@ -45,6 +50,9 @@ mv all.$TGTL all.zh
 if [ $TGTL == 'zh' ]
 then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing.sh all
+elif [ $TGTL == 'de' ]
+then
+    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-Both-EN-tok.sh all
 else
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
 fi

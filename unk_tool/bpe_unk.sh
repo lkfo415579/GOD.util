@@ -1,19 +1,19 @@
 SCRIPT=~/GOD.util/BPE_TOOLKIT/apply_bpe_unk2.py
-# SRCL=en
-# TGTL=zh
+SRCL=en
+TGTL=de
 # ST=${SRCL}-${TGTL}
 # import
-TERM=Engine
+TERM=Common
 CORPUS_DIR=..
-python $SCRIPT -c $CORPUS_DIR/en-zh/en.bpe < unk.en-zh.en > tmp.en
-python $SCRIPT -c $CORPUS_DIR/en-zh/zh.bpe < unk.en-zh.zh > tmp.zh
+python $SCRIPT -c $CORPUS_DIR/$SRCL-$TGTL/$SRCL.bpe < unk.$SRCL-$TGTL.$SRCL > tmp.$SRCL
+python $SCRIPT -c $CORPUS_DIR/$SRCL-$TGTL/$TGTL.bpe < unk.$SRCL-$TGTL.$TGTL > tmp.$TGTL
 #
-python $SCRIPT -c $CORPUS_DIR/zh-en/en.bpe < unk.zh-en.en > tmp.2.en
-python $SCRIPT -c $CORPUS_DIR/zh-en/zh.bpe < unk.zh-en.zh > tmp.2.zh
+python $SCRIPT -c $CORPUS_DIR/$TGTL-$SRCL/$SRCL.bpe < unk.$TGTL-$SRCL.$SRCL > tmp.2.$SRCL
+python $SCRIPT -c $CORPUS_DIR/$TGTL-$SRCL/$TGTL.bpe < unk.$TGTL-$SRCL.$TGTL > tmp.2.$TGTL
 
-cat tmp.en >> $CORPUS_DIR/en-zh/train.$TERM.en-zh.en
-cat tmp.zh >> $CORPUS_DIR/en-zh/train.$TERM.en-zh.zh
-cat tmp.2.en >> $CORPUS_DIR/zh-en/train.$TERM.zh-en.en
-cat tmp.2.zh >> $CORPUS_DIR/zh-en/train.$TERM.zh-en.zh
+cat tmp.$SRCL >> $CORPUS_DIR/$SRCL-$TGTL/train.$TERM.$SRCL-$TGTL.$SRCL
+cat tmp.$TGTL >> $CORPUS_DIR/$SRCL-$TGTL/train.$TERM.$SRCL-$TGTL.$TGTL
+cat tmp.2.$SRCL >> $CORPUS_DIR/$TGTL-$SRCL/train.$TERM.$TGTL-$SRCL.$SRCL
+cat tmp.2.$TGTL >> $CORPUS_DIR/$TGTL-$SRCL/train.$TERM.$TGTL-$SRCL.$TGTL
 
 rm tmp*
