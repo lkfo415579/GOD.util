@@ -188,10 +188,10 @@ def alignment_parse(slines, plines, output, master, target,
                 outlines.append(post_sline + '\n')
             outlines.append(post_pline + '\n')
         except KeyError:
-            print 'Get IndexError skip this line!'
+            # print 'Get IndexError skip this line!'
             continue
         except ValueError:
-            print 'Get ValueError'
+            # print 'Get ValueError'
             print ent
             continue
     fout = codecs.open(output, 'w', 'utf-8')

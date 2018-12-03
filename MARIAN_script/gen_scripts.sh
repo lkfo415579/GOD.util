@@ -1,7 +1,7 @@
 SRCL=en
-TGTL=zh
-TERM=Engine
-CORPUS=/data/workshop/jixiegongcheng
+TGTL=th
+TERM=Common
+CORPUS=/data/workshop/world/tizh/corpus/handle
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
 rm -r tmp
 mkdir -p tmp
