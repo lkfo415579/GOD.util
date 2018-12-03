@@ -4,7 +4,8 @@ import sys
 import requests
 
 IP = "192.168.50.15"
-PORT = 2013
+# PORT = 2014
+PORT = 2076
 sys.stdin = codecs.getreader("UTF-8")(sys.stdin)
 sys.stdout = codecs.getwriter("UTF-8")(sys.stdout)
 
