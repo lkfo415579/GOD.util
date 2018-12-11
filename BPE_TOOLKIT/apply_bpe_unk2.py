@@ -58,7 +58,7 @@ class BPE(object):
         self.vocab = vocab
 
         # self.glossaries = glossaries if glossaries else []
-        self.glossaries = ['<unk2>']
+        self.glossaries = ['<unk2>', '<NOUN>', '<DATE>', '<PERSON>', '<NUMBER>']
 
         self.cache = {}
 

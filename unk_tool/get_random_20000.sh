@@ -1,1 +1,1 @@
-sed -n "0~5000p" $1 | head -n 20000 > unk.corpus
+sed -n "0~10p" $1 | head -n 100000 > unk.corpus

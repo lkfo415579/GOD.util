@@ -37,7 +37,7 @@ from polyglot.text import Text
 
 __author__ = "McVilla"
 __date__ = "2018/5/7"
-LTP_DATA_DIR = '/home/training/ltp_model'
+LTP_DATA_DIR = '/home/revo/ltp_model'
 pos_model_path = os.path.join(LTP_DATA_DIR, 'pos.model')
 ner_model_path = os.path.join(LTP_DATA_DIR, 'ner.model')
 
