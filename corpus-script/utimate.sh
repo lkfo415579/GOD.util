@@ -1,8 +1,9 @@
-SRCL=en
-TGTL=de
+SRCL=bo
+TGTL=zh
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
-FILTER=true
+FILTER=false
+CLEAN_DOUBLE=false
 echo "0. SRCL:"$SRCL" TGTL:"$TGTL
 # 1
 echo "1. duplicated clean"
@@ -22,23 +23,26 @@ python $SCRIPT/Remove_Line.py all.$TGTL
 mv all.$SRCL.without_external_line all.$SRCL
 mv all.$TGTL.without_external_line all.$TGTL
 # 4
-echo "4. clean double length sents"
 # chinese
-if [ $TGTL == 'zh' ]
+if  [ $CLEAN_DOUBLE == true ]
 then
-    python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 0
-else
-    python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
+    echo "4. clean double length sents"
+    if [ $TGTL == 'zh' ]
+    then
+        python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 0
+    else
+        python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
+    fi
 fi
 # en-es
 # python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
 mv all.$SRCL.clean all.$SRCL
 mv all.$TGTL.clean all.$TGTL
 # 5
-echo "5. clean language pair err"
 # en-zh
-if [ $FILTER ]
+if [ $FILTER == true ]
 then
+    echo "5. clean language pair err"
     python $SCRIPT/../python_toolkit/pair_lang_filter.py all $TGTL $SRCL all.filter
     mv all.filter.$SRCL all.$SRCL
     mv all.filter.$TGTL all.$TGTL
