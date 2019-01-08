@@ -38,7 +38,7 @@ mkdir -p $OUTPUT_DIR
     $MARIAN_TRAIN \
         --model $MODEL_DIR/model_revo.npz --type transformer \
         --train-sets $CORPUS_DIR/$TRAIN.$SRCL $CORPUS_DIR/$TRAIN.$TGTL \
-        --max-length 100 \
+        --max-length 140 \
         --vocabs $MODEL_DIR/vocab.$SRCL.yml $MODEL_DIR/vocab.$TGTL.yml \
         --mini-batch-fit -w 9500 --maxi-batch 1000 \
         --early-stopping 10 --cost-type=ce-mean-words \
