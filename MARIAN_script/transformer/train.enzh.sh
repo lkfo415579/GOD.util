@@ -45,7 +45,7 @@ mkdir -p $OUTPUT_DIR
         --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
         --valid-metrics ce-mean-words perplexity translation \
         --valid-sets $CORPUS_DIR/$VALID.$SRCL $CORPUS_DIR/$VALID.$TGTL \
-        --valid-script-path "bash ./validate."$SRCL$TGTL".sh" \
+        --valid-script-path "bash ./validate-"$SRCL\-$TGTL".sh" \
         --valid-translation-output $OUTPUT_DIR/$ID.tf.$SRCL$TGTL.single --quiet-translation \
         --valid-mini-batch 64 \
         --beam-size 6 --normalize 0.6 \
