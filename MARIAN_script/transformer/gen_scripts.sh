@@ -1,7 +1,7 @@
-SRCL=ja
+SRCL=en
 TGTL=zh
-TERM=Common
-CORPUS=/data/workshop/world/tizh/corpus/handle
+TERM=Medicine
+CORPUS=/home/revo/flying_man/medicine
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
 rm -r tmp
 mkdir -p tmp
