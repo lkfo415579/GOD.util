@@ -1,9 +1,12 @@
-SRCL=bo
+SRCL=ug
 TGTL=zh
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
 FILTER=false
+# clean double, 1 is space, 0 is char
 CLEAN_DOUBLE=false
+D1=0
+D2=0
 echo "0. SRCL:"$SRCL" TGTL:"$TGTL
 # 1
 echo "1. duplicated clean"
@@ -27,12 +30,7 @@ mv all.$TGTL.without_external_line all.$TGTL
 if  [ $CLEAN_DOUBLE == true ]
 then
     echo "4. clean double length sents"
-    if [ $TGTL == 'zh' ]
-    then
-        python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 0
-    else
-        python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
-    fi
+    python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 $D1 $D2
 fi
 # en-es
 # python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
@@ -57,6 +55,9 @@ then
 elif [ $TGTL == 'de' ]
 then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-Both-EN-tok.sh all
+elif [ $SRCL != 'en' ]
+then
+    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-EN-tok.sh all
 else
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
 fi
