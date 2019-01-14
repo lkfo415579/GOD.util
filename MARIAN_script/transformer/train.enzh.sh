@@ -38,14 +38,14 @@ mkdir -p $OUTPUT_DIR
     $MARIAN_TRAIN \
         --model $MODEL_DIR/model_revo.npz --type transformer \
         --train-sets $CORPUS_DIR/$TRAIN.$SRCL $CORPUS_DIR/$TRAIN.$TGTL \
-        --max-length 100 \
+        --max-length 140 \
         --vocabs $MODEL_DIR/vocab.$SRCL.yml $MODEL_DIR/vocab.$TGTL.yml \
         --mini-batch-fit -w 9500 --maxi-batch 1000 \
         --early-stopping 10 --cost-type=ce-mean-words \
         --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
         --valid-metrics ce-mean-words perplexity translation \
         --valid-sets $CORPUS_DIR/$VALID.$SRCL $CORPUS_DIR/$VALID.$TGTL \
-        --valid-script-path "bash ./validate."$SRCL$TGTL".sh" \
+        --valid-script-path "bash ./validate-"$SRCL\-$TGTL".sh" \
         --valid-translation-output $OUTPUT_DIR/$ID.tf.$SRCL$TGTL.single --quiet-translation \
         --valid-mini-batch 64 \
         --beam-size 6 --normalize 0.6 \
