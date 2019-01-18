@@ -4,3 +4,4 @@ mecab-dic
 tmp*
 .*
 gg.sh
+cc.sh

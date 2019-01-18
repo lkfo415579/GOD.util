@@ -1,7 +1,7 @@
-SRCL=ug
+SRCL=ru
 TGTL=zh
 TERM=Common
-CORPUS=/home/revo/ON_THE_FLOOR/ugzh
+CORPUS=/home/revo/ON_THE_FLOOR/ruzh
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
 rm -r tmp
 mkdir -p tmp
