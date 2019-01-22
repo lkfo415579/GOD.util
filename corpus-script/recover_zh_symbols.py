@@ -9,17 +9,29 @@ sys.stdin = codecs.getreader('UTF-8')(sys.stdin)
 sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
 
 
+def is_ascii(s):
+    return all(ord(c) < 128 for c in s)
+
 def replacement(line, symbol=".", repl="。"):
-    dot = Regex(r'(\D\s*)\%s(\s*[\D$])' % symbol)
+    line = line.replace(". . .", ".")
+    dot = Regex(r'(\S\s*)\%s(\s*\S*)' % symbol)
     m = dot.findall(line)
     if m:
+        # print "BEFORE:", line
+        # print m
         for ele in m:
+            b_char = ele[0].strip()
+            a_char = ele[1].strip()
             # consecutive dot avoid
-            if symbol != ele[1].strip() and symbol != ele[0].strip():
-                # print "BEFORE:", line
+            if symbol != b_char and symbol != a_char:
+                # both are digit or are letters
+                if is_ascii(b_char) and is_ascii(a_char):
+                    return line
                 line = line.replace(ele[0] + symbol + ele[1], ele[0] + repl + ele[1])
-                # print "AFTER:", line
-                # print ele
+                # debug
+                # if symbol == ',':
+                #     print m
+                #     print "AFTER:", line
     return line
 
 for line in sys.stdin:
