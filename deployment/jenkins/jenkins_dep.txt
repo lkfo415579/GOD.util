@@ -1,0 +1,15 @@
+sudo apt-get install python
+sudo apt-get install python-pip
+sudo apt-get install python-numpy libicu-dev
+sudo apt-get install libmecab-dev
+sudo apt-get install mecab mecab-ipadic-utf8
+pip install validictory
+pip install tornado
+pip install polyglot
+pip install pyinstaller
+pip install requests regx
+pip install jieba
+pip install mecab-python3
+#
+pip install validictory tornado polyglot requests regx jieba mecab-python3
+
