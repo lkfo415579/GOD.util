@@ -1,7 +1,7 @@
-SRCL=ja
+SRCL=en
 TGTL=zh
-TERM=Common
-CORPUS=/home/revo/ON_THE_FLOOR/jazh
+TERM=News
+CORPUS=/home/revo/training_workshop
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
 rm -r tmp
 mkdir -p tmp

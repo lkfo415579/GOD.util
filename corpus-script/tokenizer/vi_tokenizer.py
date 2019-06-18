@@ -11,5 +11,5 @@ sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
 
 for line in sys.stdin:
     line = line.strip()
-    line = ViTokenizer.tokenize(line.encode("utf-8")).decode('utf-8').strip()
+    line = ViTokenizer.tokenize(line).decode('utf-8').strip()
     sys.stdout.write(line + "\n")
