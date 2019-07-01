@@ -8,7 +8,7 @@ binmode(STDIN, ":utf8");
 binmode(STDOUT, ":utf8");
 binmode(STDERR, ":utf8");
 use utf8;
-use LWP::Simple;
+# use LWP::Simple;
 use strict;
 use warnings;
 

@@ -5,3 +5,4 @@ tmp*
 .*
 gg.sh
 cc.sh
+jieba_ext/
