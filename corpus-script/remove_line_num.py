@@ -22,7 +22,6 @@ if len(sys.argv) < 5:
 else:
     output_file = False
 
-
 if output_file:
     for i, line in enumerate(f1):
         if i not in error:

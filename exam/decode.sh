@@ -1,1 +1,1 @@
-cat brave/news.zhen.bpe.zh | ~/marian-dev/build/marian-decoder -c 2_TRANS_REVO_model_zh-en/model_revo.npz.decoder.yml -o brave/output
+cat $1 | ~/marian-dev/build/marian-decoder -c $2/model_revo.npz.decoder.yml -b 6 --mini-batch 100 -d $3 -o output
