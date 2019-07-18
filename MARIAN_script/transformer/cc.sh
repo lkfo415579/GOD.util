@@ -1,7 +1,7 @@
 SRCL=en
 TGTL=zh
 TERM=News
-CORPUS=/home/revo/training_workshop
+CORPUS=/home/revo/golbin/enzh_best
 CORPUS=$(echo $CORPUS| sed 's/\//\\\//g')
 rm -r tmp
 mkdir -p tmp

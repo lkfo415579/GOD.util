@@ -1,12 +1,14 @@
-SRCL=ug
+SRCL=bo
 TGTL=zh
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
 FILTER=false
 # clean double, 1 is space, 0 is char
-CLEAN_DOUBLE=false
-D1=0
+CLEAN_DOUBLE=true
+D1=1
 D2=0
+# normalize speical upper letter 2 lower letter
+NORMAL=true
 echo "0. SRCL:"$SRCL" TGTL:"$TGTL
 # 1
 echo "1. duplicated clean"
@@ -46,10 +48,19 @@ then
     mv all.filter.$TGTL all.$TGTL
 fi
 # 6
+if [ $NORMAL == true ]
+then
+    echo "5.1 normalizing symbols of target corpus"
+    $SCRIPT/../util_token/normalize_symbols.perl < all.$TGTL > all.t.$TGTL
+    $SCRIPT/../util_token/normalize_symbols.perl < all.$SRCL > all.t.$SRCL
+    mv all.t.$TGTL all.$TGTL
+    mv all.t.$SRCL all.$SRCL
+fi
+# 6
 echo "6. util auto processing"
 mv all.$SRCL all.en
 mv all.$TGTL all.zh
-if [ $TGTL == 'zh' ]
+if [ $SRCL == 'en' ] && [ $TGTL == 'zh' ]
 then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing.sh all
 elif [ $TGTL == 'de' ]
@@ -57,6 +68,7 @@ then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-Both-EN-tok.sh all
 elif [ $SRCL != 'en' ]
 then
+    echo "No-EN-Tok"
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-EN-tok.sh all
 else
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
