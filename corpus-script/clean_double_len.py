@@ -22,8 +22,8 @@ f2 = codecs.open(sys.argv[2], 'r', encoding='utf8').readlines()
 
 print "Finished Reading"
 
-f1_out = codecs.open(sys.argv[1] + ".clean", 'wa', encoding='utf8')
-f2_out = codecs.open(sys.argv[2] + ".clean", 'wa', encoding='utf8')
+f1_out = codecs.open(sys.argv[1] + ".double", 'wa', encoding='utf8')
+f2_out = codecs.open(sys.argv[2] + ".double", 'wa', encoding='utf8')
 err_out = codecs.open(sys.argv[1] + ".err", 'wa', encoding='utf8')
 
 err = 0

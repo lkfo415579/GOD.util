@@ -6,7 +6,7 @@ FILTER=false
 # clean double, 1 is space, 0 is char
 CLEAN_DOUBLE=true
 D1=1
-D2=0
+D2=1
 # normalize speical upper letter 2 lower letter
 NORMAL=true
 echo "0. SRCL:"$SRCL" TGTL:"$TGTL
@@ -28,26 +28,15 @@ python $SCRIPT/Remove_Line.py all.$TGTL
 mv all.$SRCL.without_external_line all.$SRCL
 mv all.$TGTL.without_external_line all.$TGTL
 # 4
-# chinese
-if  [ $CLEAN_DOUBLE == true ]
-then
-    echo "4. clean double length sents"
-    python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 $D1 $D2
-fi
-# en-es
-# python $SCRIPT/clean_double_len.py all.$SRCL all.$TGTL 3.0 1 1
-mv all.$SRCL.clean all.$SRCL
-mv all.$TGTL.clean all.$TGTL
-# 5
 # en-zh
 if [ $FILTER == true ]
 then
-    echo "5. clean language pair err"
+    echo "4. clean language pair err"
     python $SCRIPT/../python_toolkit/pair_lang_filter.py all $TGTL $SRCL all.filter
     mv all.filter.$SRCL all.$SRCL
     mv all.filter.$TGTL all.$TGTL
 fi
-# 6
+# 5.1
 if [ $NORMAL == true ]
 then
     echo "5.1 normalizing symbols of target corpus"
@@ -56,8 +45,8 @@ then
     mv all.t.$TGTL all.$TGTL
     mv all.t.$SRCL all.$SRCL
 fi
-# 6
-echo "6. util auto processing"
+
+echo "5. util auto processing"
 mv all.$SRCL all.en
 mv all.$TGTL all.zh
 if [ $SRCL == 'en' ] && [ $TGTL == 'zh' ]
@@ -72,6 +61,19 @@ then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-EN-tok.sh all
 else
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
+fi
+#
+# chinese
+if  [ $CLEAN_DOUBLE == true ]
+then
+    echo "6. clean double length sents"
+    python $SCRIPT/clean_double_len.py all.en-zh.clean.en all.en-zh.clean.zh 3.0 $D1 $D2
+    python $SCRIPT/clean_double_len.py all.zh-en.clean.en all.zh-en.clean.zh 3.0 $D1 $D2
+
+    mv all.en-zh.clean.en.double all.en-zh.clean.en
+    mv all.en-zh.clean.zh.double all.en-zh.clean.zh
+    mv all.zh-en.clean.en.double all.zh-en.clean.en
+    mv all.zh-en.clean.zh.double all.zh-en.clean.zh
 fi
 # 7
 echo "7. BPE"
