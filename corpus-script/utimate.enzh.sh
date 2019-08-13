@@ -7,6 +7,10 @@ FILTER=true
 CLEAN_DOUBLE=true
 D1=1
 D2=1
+# normalize speical upper letter 2 lower letter
+NORMAL=true
+# is BPE tied together
+MIX=false
 echo "0. SRCL:"$SRCL" TGTL:"$TGTL
 # 1
 echo "1. duplicated clean"
@@ -25,7 +29,7 @@ python $SCRIPT/Remove_Line.py all.$SRCL
 python $SCRIPT/Remove_Line.py all.$TGTL
 mv all.$SRCL.without_external_line all.$SRCL
 mv all.$TGTL.without_external_line all.$TGTL
-#
+# 4
 # en-zh
 if [ $FILTER == true ]
 then
@@ -34,11 +38,20 @@ then
     mv all.filter.$SRCL all.$SRCL
     mv all.filter.$TGTL all.$TGTL
 fi
-#
+# 5.1
+if [ $NORMAL == true ]
+then
+    echo "5.1 normalizing symbols of target corpus"
+    $SCRIPT/../util_token/normalize_symbols.perl < all.$TGTL > all.t.$TGTL
+    $SCRIPT/../util_token/normalize_symbols.perl < all.$SRCL > all.t.$SRCL
+    mv all.t.$TGTL all.$TGTL
+    mv all.t.$SRCL all.$SRCL
+fi
+
 echo "5. util auto processing"
 mv all.$SRCL all.en
 mv all.$TGTL all.zh
-if [ $TGTL == 'zh' ]
+if [ $SRCL == 'en' ] && [ $TGTL == 'zh' ]
 then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing.sh all
 elif [ $TGTL == 'de' ]
@@ -46,6 +59,7 @@ then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-Both-EN-tok.sh all
 elif [ $SRCL != 'en' ]
 then
+    echo "No-EN-Tok"
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-EN-tok.sh all
 else
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
@@ -70,13 +84,17 @@ mv all.en-zh.clean.zh corpus.$SRCL-$TGTL.$TGTL
 mv all.zh-en.clean.en corpus.$TGTL-$SRCL.$SRCL
 mv all.zh-en.clean.zh corpus.$TGTL-$SRCL.$TGTL
 #-- bpe procedure
-# mkdir data
-# mv * data
 mkdir -p $SRCL-$TGTL $TGTL-$SRCL
 mv corpus.$SRCL-$TGTL.* $SRCL-$TGTL/
 mv corpus.$TGTL-$SRCL.* $TGTL-$SRCL/
 # en-zh
-cp $SCRIPT/../BPE_TOOLKIT/pre.sh ./
+if [ $MIX == true ]
+then
+    BPE=$SCRIPT/../BPE_TOOLKIT/pre_mix.sh
+else
+    BPE=$SCRIPT/../BPE_TOOLKIT/pre.sh
+fi
+cp $BPE ./pre.sh
 sed -i "s/SRCL=.*$/SRCL="$SRCL"/g" pre.sh
 sed -i "s/TGTL=.*$/TGTL="$TGTL"/g" pre.sh
 sed -i "s/P=.*$/P="corpus.$SRCL-$TGTL"/g" pre.sh

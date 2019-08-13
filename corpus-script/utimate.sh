@@ -1,4 +1,4 @@
-SRCL=bo
+SRCL=ja
 TGTL=zh
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
@@ -9,6 +9,8 @@ D1=1
 D2=1
 # normalize speical upper letter 2 lower letter
 NORMAL=true
+# is BPE tied together
+MIX=true
 echo "0. SRCL:"$SRCL" TGTL:"$TGTL
 # 1
 echo "1. duplicated clean"
@@ -82,13 +84,17 @@ mv all.en-zh.clean.zh corpus.$SRCL-$TGTL.$TGTL
 mv all.zh-en.clean.en corpus.$TGTL-$SRCL.$SRCL
 mv all.zh-en.clean.zh corpus.$TGTL-$SRCL.$TGTL
 #-- bpe procedure
-# mkdir data
-# mv * data
 mkdir -p $SRCL-$TGTL $TGTL-$SRCL
 mv corpus.$SRCL-$TGTL.* $SRCL-$TGTL/
 mv corpus.$TGTL-$SRCL.* $TGTL-$SRCL/
 # en-zh
-cp $SCRIPT/../BPE_TOOLKIT/pre.sh ./
+if [ $MIX == true ]
+then
+    BPE=$SCRIPT/../BPE_TOOLKIT/pre_mix.sh
+else
+    BPE=$SCRIPT/../BPE_TOOLKIT/pre.sh
+fi
+cp $BPE ./pre.sh
 sed -i "s/SRCL=.*$/SRCL="$SRCL"/g" pre.sh
 sed -i "s/TGTL=.*$/TGTL="$TGTL"/g" pre.sh
 sed -i "s/P=.*$/P="corpus.$SRCL-$TGTL"/g" pre.sh

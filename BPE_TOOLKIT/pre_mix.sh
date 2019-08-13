@@ -16,16 +16,16 @@ P=final_jpzh.en-zh.clean
 P1=~/GOD.util/BPE_TOOLKIT
 
 # learn BPE on joint vocabulary
-echo "Seprerate BPE VERSION"
+echo "MIX BPE VERSION"
 echo "EMAIL&URL APPLY BPE"
 echo "Learning BPE"
-cat ${P}.${SRCL} ${P}.${TGTL} | python $P1/learn_bpe.py -s 100000 > ${SRCL}${TGTL}.bpe
+cat ${P}.${SRCL} ${P}.${TGTL} | python $P1/learn_bpe.py -s 64000 > ${SRCL}${TGTL}.bpe
 echo "Applying BPE"
 python $P1/apply_bpe.py -c ${SRCL}${TGTL}.bpe < ${P}.${SRCL} > ${P}.bpe.${SRCL}
 python $P1/apply_bpe.py -c ${SRCL}${TGTL}.bpe < ${P}.${TGTL} > ${P}.bpe.${TGTL}
 
 # SHUFFLE
-NUM=30000
+NUM=10000
 CORPUS=${P}.bpe
 TERM=Common
 paste -d $'\t' $CORPUS.$SRCL $CORPUS.$TGTL | shuf > $CORPUS.shuf
