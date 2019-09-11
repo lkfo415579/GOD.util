@@ -14,6 +14,8 @@ def is_ascii(s):
 
 def replacement(line, symbol=".", repl="。"):
     line = line.replace(". . .", ".")
+    line = line.replace(u"．", ".")
+    # line = line.replace("...", ".")
     dot = Regex(r'(\S\s*)\%s(\s*\S*)' % symbol)
     m = dot.findall(line)
     if m:
@@ -34,8 +36,13 @@ def replacement(line, symbol=".", repl="。"):
                 #     print "AFTER:", line
     return line
 
+tail_dot = Regex(r'\.+$')
+def remove_tailing_dot(line):
+    return tail_dot.sub("", line)
+
 for line in sys.stdin:
     line = line.strip()
     line = replacement(line)
     line = replacement(line, ",", "，")
+    line = remove_tailing_dot(line)
     sys.stdout.write(line + "\n")
