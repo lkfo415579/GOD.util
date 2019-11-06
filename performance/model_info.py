@@ -5,6 +5,9 @@ from sys import getsizeof
 
 SORT = True
 model = np.load(sys.argv[1])
+display_key = ""
+if len(sys.argv) > 2:
+    display_key = sys.argv[2]
 
 print "LOADED model:%s" % sys.argv[1]
 if SORT:
@@ -12,6 +15,7 @@ if SORT:
     print "sorted keys..."
 
 all_s = 0
+all_parameters = 0
 for key in model:
     if SORT:
         name = key[0]
@@ -23,9 +27,14 @@ for key in model:
         values = model[key]
     print "Name:", name,
     print "Shapes:", shape,
+    all_parameters += (shape[0] * shape[1]) if len(shape) == 2 else shape[0]
     s = getsizeof(values)
     print "Size:", s, "," + str(s / 1024 ** 2) + "MB"
     all_s += s
+    # display value
+    if display_key and name == display_key:
+        print values
+
 print "=" * 100
 # display config
 try:
@@ -42,4 +51,4 @@ except:
 
 print "=" * 100
 # Total size
-print "Toal Size: %d, %dMB" % (all_s, all_s / 1024 ** 2)
+print "Toal Size: %d, %dMB, %s parameters" % (all_s, all_s / 1024 ** 2, all_parameters)
