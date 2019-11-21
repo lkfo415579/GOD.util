@@ -85,6 +85,7 @@ def cal_cdf_model(corpus, freq_dict, T_freq):
     with open(corpus, "r") as f:
         for line in f.readlines():
             line = line.split()
+            length = len(line) if len(line) else 1.
             SUM = 0
             for w in line:
                 p = word_pro_cal(freq_dict[w], T_freq)
@@ -93,12 +94,14 @@ def cal_cdf_model(corpus, freq_dict, T_freq):
                     SUM += p
             # SUM = -SUM
             # print("Before Nor:", SUM)
-            SUM = SUM / float(len(line))
+            SUM = SUM / float(length)
             # print(SUM)
             data.append(SUM)
     # data contains all sum log
     # bins='auto', paper is 1000
-    bin_size = np.arange(2, 5, 0.05)
+    m = min(data)
+    M = max(data)
+    bin_size = np.arange(m, M, 0.05)
     # v, base = np.histogram(data, bins='auto')
     v, base = np.histogram(data, bins=bin_size)
     print ("Showing only font 50 items")

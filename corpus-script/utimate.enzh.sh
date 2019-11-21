@@ -1,7 +1,7 @@
 SRCL=en
 TGTL=zh
 SCRIPT=~/GOD.util/corpus-script
-TERM=Common
+TERM=Medicine
 FILTER=true
 # clean double, 1 is space, 0 is char
 CLEAN_DOUBLE=true
