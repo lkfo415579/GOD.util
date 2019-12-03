@@ -78,8 +78,9 @@ def save_vocab(name, vocab):
 
 def cal_cdf_model(corpus, freq_dict, T_freq):
     print ("=" * 100)
-    print ("Calculating CDF MODEL")
+    print ("Calculating MOD CDF MODEL")
     print ("T_freq:%d" % T_freq)
+    print ("Norm:", args.norm)
     data = []
     debug = 0
     with open(corpus, "r") as f:
@@ -92,16 +93,18 @@ def cal_cdf_model(corpus, freq_dict, T_freq):
                 if p != 0:
                     # SUM += math.log(p)
                     SUM += p
-            # SUM = -SUM
-            # print("Before Nor:", SUM)
-            SUM = SUM / float(length)
+            if args.norm:
+                SUM = SUM / float(length)
             # print(SUM)
             data.append(SUM)
     # data contains all sum log
     # bins='auto', paper is 1000
-    m = min(data)
-    M = max(data)
-    bin_size = np.arange(m, M, 0.05)
+    if args.norm:
+        m = min(data)
+        M = max(data)
+        bin_size = np.arange(m, M, 0.05)
+    else:
+        bin_size = 'auto'
     # v, base = np.histogram(data, bins='auto')
     v, base = np.histogram(data, bins=bin_size)
     print ("Showing only font 50 items")
@@ -130,13 +133,13 @@ def MOD(data):
 
 def parse_word_emb(file):
     import codecs
-    emb=codecs.open(file, 'r', encoding="utf-8").readlines()
+    emb=codecs.open(file, 'r', encoding="utf-8", errors='ignore').readlines()
     vocab_size, dim=emb[0].split()
     emb=emb[1:]
     res={}
     for line in emb:
       line=line.split()
-      word=line[0]
+      word=line[0].encode('utf-8', 'ignore')
       data=[float(i) for i in line[1:]]
       mod=MOD(data)
       res[word]=mod
@@ -154,6 +157,7 @@ def parse_args():
     parser.add_argument("--control", type=str, default="",
                         help="Add control symbols to vocabulary. "
                              "Control symbols are separated by comma.")
+    parser.add_argument("--norm", default=False, type=bool, help="Mod norm enable?")
 
     return parser.parse_args()
 
@@ -174,6 +178,7 @@ def main():
     if args.emb_vector:
       emb=parse_word_emb(args.emb_vector)
 
+    failed = 0
     for word, freq in zip(words, counts):
         if limit and len(vocab) >= limit:
             break
@@ -181,18 +186,17 @@ def main():
         if word in vocab:
             print("Warning: found duplicate token %s, ignored" % word)
             continue
-
-        # vocab[word] = len(vocab)
-        # print(word, freq)
         if args.emb_vector:
-          # if not word in emb:
-          #   print ("Out of vocab", word)
-          score=emb.get(word, 10.0)
-          # print(word, score)
+          if word not in emb:
+              failed += 1
+          #     print("NOT FOUND IN EMB:", word)
+          score = emb.get(word, 10.0)
           vocab[word]=score
         else:
           vocab[word]=freq
           count += freq
+    if args.emb_vector:
+        print("Total Failed Emb:%d" % failed)
 
     freq_dict, T_freq=save_vocab(args.output, vocab)
     cal_cdf_model(args.corpus, freq_dict, T_freq)
