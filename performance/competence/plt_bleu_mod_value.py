@@ -1,10 +1,14 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import matplotlib
 matplotlib.use('TkAgg')
 
+plt.rc('font', size=15, family='Times New Roman')
 print("python x.py valid.log mod_file")
+ENG = ticker.EngFormatter(sep='')
+ENG.ENG_PREFIXES[3] = 'K'
 
 def draw_bleu(bleu_f, name, plt_name, color):
     bleu = {}
@@ -20,8 +24,11 @@ def draw_bleu(bleu_f, name, plt_name, color):
         BLEU.append(bleu[n])
     # BLEU
     BLEU = BLEU[:TOTAL_STEP]
-    ax2.plot(name, BLEU, label="BLEU_" + plt_name, color=color)
+    # "BLEU_" + plt_name
+    print("ax2, step:%d" % len(name))
+    curve = ax2.plot(name, BLEU, label='BLEU', color=color, marker='^')
     print(bleu)
+    return curve
         
 def draw(MOD_log, plt_name, color):
     r = 0
@@ -41,31 +48,41 @@ def draw(MOD_log, plt_name, color):
 
     data.sort()
     data = data[:TOTAL_STEP]
-    name = [x[0] for x in data]
+    step = [x[0] for x in data]
     mod = [x[1] for x in data]
-
-    ax1.plot(name, mod, label=plt_name, color=color)
+    # normlization
+    # mod = [x[1] / 23615 for x in data]
+    # plt_name + "_NORM"
+    print("ax1, step:%d" % len(step))
+    curve = ax1.plot(step, mod, label='Norm', color=color, marker='s')
     print(data)
     print("=" * 100)
-    return name
+    return step, curve
 
-TOTAL_STEP = 47
-ax1 = plt.figure().add_subplot(111)
-ax1.set_ylabel("AVG MOD")
+TOTAL_STEP = 40
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+ax1.set_ylabel("Norm of Source Embedding")
 ax2 = plt.twinx()
-ax2.set_ylabel("BLEU SCORE")
+ax2.set_ylabel("BLEU Score")
+#
+ax1.yaxis.set_major_formatter(ENG)
+ax2.xaxis.set_major_formatter(ENG)
 #
 colors = {1:["b", "g"], 3:["r", "c"], 5:["m", "y"]}
-names = {1: "CL_MOD", 3: "BASE", 5: "AVG_MOD"}
+names = {1: "BASE", 3: "CL", 5: "MOD"}
 for i in range(1, len(sys.argv), 2):
     bleu_f = open(sys.argv[i], 'r').readlines()
     MOD_log = open(sys.argv[i + 1], 'r').readlines()
-    name = draw(MOD_log, names[i], colors[i][0])
-    draw_bleu(bleu_f, name, names[i], colors[i][1])
+    step, mod_curve = draw(MOD_log, names[i], colors[i][0])
+    bleu_curve = draw_bleu(bleu_f, step, names[i], colors[i][1])
 #
-ax1.set_xlabel("STEP")
-ax1.legend(loc='best')
-ax2.legend(loc='lower right')
-plt.title("MOD_AVG + BLEU")
-plt.locator_params(nbins=20)
+ax1.set_xlabel("Training Step")
+h = [bleu_curve[0], mod_curve[0]]
+plt.legend(handles=h, loc="lower right")
+# fig.legend(loc="lower right", bbox_to_anchor=(1,0), bbox_transform=ax1.transAxes)
+# plt.title("NORM + BLEU")
+plt.locator_params(nbins=10)
+plt.savefig('MOD.pdf',format="pdf",bbox_inches='tight')
 plt.show()
+
