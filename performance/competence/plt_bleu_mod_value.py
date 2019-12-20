@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import matplotlib
+from matplotlib.ticker import MaxNLocator
 matplotlib.use('TkAgg')
 
 plt.rc('font', size=15, family='Times New Roman')
@@ -82,7 +83,11 @@ h = [bleu_curve[0], mod_curve[0]]
 plt.legend(handles=h, loc="lower right")
 # fig.legend(loc="lower right", bbox_to_anchor=(1,0), bbox_transform=ax1.transAxes)
 # plt.title("NORM + BLEU")
-plt.locator_params(nbins=10)
+# plt.locator_params(nbins=10)
+ax1.locator_params(nbins=10)
+# ax1.yaxis.set_major_locator(MaxNLocator(nbins=10))
+# ax2.yaxis.set_major_locator(MaxNLocator(nbins=10))
+
 plt.savefig('MOD.pdf',format="pdf",bbox_inches='tight')
 plt.show()
 
