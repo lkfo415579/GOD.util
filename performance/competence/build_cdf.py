@@ -75,7 +75,8 @@ def cal_cdf_model(corpus, vocab):
             #  print (SUM)
     # data contains all sum log
     # bins='auto'
-    v, base = np.histogram(data, bins=np.arange(1000))
+    # v, base = np.histogram(data, bins=np.arange(1000))
+    v, base = np.histogram(data, bins='auto')
     print ("data:", data[:50])
     print ("value", v[:50])
     base = base.astype(np.float32)

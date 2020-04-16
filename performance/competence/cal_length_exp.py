@@ -1,7 +1,7 @@
 import sys
 import math
 
-print("usage: x.py norm_f freq_f corpus")
+print("usage: x.py norm_f freq_f source_bpe_corpus")
 norm_f = open(sys.argv[1], 'r').readlines()
 freq_f = open(sys.argv[2], 'r').readlines()
 corpus = open(sys.argv[3], 'r').readlines()
@@ -59,13 +59,13 @@ for i, line in enumerate(corpus):
 len_data.sort(key=lambda x: x[0])
 cl_data.sort(key=lambda x: x[0])
 norm_data.sort(key=lambda x: x[0])
-print (len_data[:10])
+print(len_data[:10])
 # READ TESTSET
 BASE = open('BASE.output', 'r').readlines()
-CL = open('CL.output', 'r').readlines()
+CL = open('CL-sw.output', 'r').readlines()
 NORM = open('NORM.output', 'r').readlines()
 TEST = open('newstest2014.tc.de', 'r').readlines()
-
+SRC = open('newstest2014.tc.en', 'r').readlines()
 
 def generate(data, INPUT, name):
   r = 0
@@ -75,11 +75,31 @@ def generate(data, INPUT, name):
     r = i * portion
     o_f = open('workshop/%s%d.txt' % (name, i), 'w')
     t_f = open('workshop/t%d.txt' % i, 'w')
+    s_f = open('workshop/src%d.txt' % i, 'w')
     for l in tmp:
       score, line, id = l
       o_f.write(INPUT[id])
       t_f.write(TEST[id])
+      s_f.write(SRC[id])
 
-generate(len_data, BASE, 'base')
-generate(len_data, CL, 'cl')
-generate(len_data, NORM, 'norm')
+if sys.argv[4] == '0':
+    # LEN DATA
+    print("LENGTH_BASED")
+    generate(len_data, BASE, 'base')
+    generate(len_data, CL, 'cl')
+    generate(len_data, NORM, 'norm')
+elif sys.argv[4] == '1':
+    # CL DATA
+    print("CL_BASED")
+    generate(cl_data, BASE, 'base')
+    generate(cl_data, CL, 'cl')
+    generate(cl_data, NORM, 'norm')
+elif sys.argv[4] == '2':
+    # NORM DATA
+    print("NORM_BASED")
+    generate(norm_data, BASE, 'base')
+    generate(norm_data, CL, 'cl')
+    generate(norm_data, NORM, 'norm')
+
+
+
