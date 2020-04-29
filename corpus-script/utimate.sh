@@ -1,5 +1,5 @@
-SRCL=ja
-TGTL=zh
+SRCL=en
+TGTL=tl
 SCRIPT=~/GOD.util/corpus-script
 TERM=Common
 FILTER=false
@@ -54,15 +54,14 @@ mv all.$TGTL all.zh
 if [ $SRCL == 'en' ] && [ $TGTL == 'zh' ]
 then
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing.sh all
-elif [ $TGTL == 'de' ]
-then
-    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-Both-EN-tok.sh all
 elif [ $SRCL != 'en' ]
 then
     echo "No-EN-Tok"
     $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-EN-tok.sh all
 else
-    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
+    echo "BOTH-EN-Tok"
+    $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-Both-EN-tok.sh all
+    # $SCRIPT/../util_token/auto-preprocessing/AUTO-pre-processing-No-ZH-tok.sh all
 fi
 #
 # chinese
